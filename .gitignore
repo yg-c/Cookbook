@@ -137,3 +137,4 @@ dmypy.json
 
 # Exclude machine-specific vs code settings
 .vscode/settings.json
+django-cookbook/recipe/cookbook/migrations/__init__.py
