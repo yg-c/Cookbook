@@ -2,14 +2,14 @@ from django.db import models
 
 
 # Recipe DB
-class MeasurmentUnit(models.Model):
+class MeasurementUnit(models.Model):
     id = models.PositiveIntegerField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
 
     objects = models.Manager()
 
     class Meta:
-        db_table = "measurment_unit"
+        db_table = "measurement_unit"
 
     def __str__(self):
         return self.name
@@ -77,7 +77,7 @@ class IngredientRecipe(models.Model):
     recipe_id = models.ForeignKey(Recipe, on_delete=models.PROTECT, db_column='recipe_id')
     ingredient_id = models.ForeignKey(Ingredient, on_delete=models.PROTECT, db_column='ingredient_id')
     quantity = models.DecimalField(decimal_places=2, max_digits=15, db_column='quantity')
-    measurment_unit_id = models.ForeignKey(MeasurmentUnit, on_delete=models.PROTECT, db_column='measurment_unit_id')
+    measurment_unit_id = models.ForeignKey(MeasurementUnit, on_delete=models.PROTECT, db_column='measurement_unit_id')
 
     objects = models.Manager()
 

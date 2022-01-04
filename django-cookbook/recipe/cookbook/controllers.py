@@ -3,12 +3,12 @@ from .models import *
 
 # MeasurmentUnit
 def getallunits():
-    units = MeasurmentUnit.objects.using('default')
+    units = MeasurementUnit.objects.using('default')
     return units
 
 
 def getunitbyid(pk):
-    unit = MeasurmentUnit.objects.using('default').filter(id=pk)
+    unit = MeasurementUnit.objects.using('default').filter(id=pk)
     return unit
 
 
