@@ -1,6 +1,6 @@
 # from django.http import HttpResponse
-from cookbook import controllers
 from django.shortcuts import render
+from .models import *
 
 
 def index(request):
@@ -8,22 +8,23 @@ def index(request):
 
 
 def measurmentunits(request):
-    units = controllers.getallunits()
+    units = MeasurementUnit.objects.using('default')
     return render(request, 'units.html', {'units': units})
 
 
 def measurmentunit(request, pk):
-    unit = controllers.getunitbyid(pk)
+    unit = MeasurementUnit.objects.using('default').filter(id=pk)
     return render(request, 'unit.html', {'unit': unit})
 
 
 def getallrecipes(request):
-    recipes = controllers.getallrecipes()
+    recipes = Recipe.objects.using('default')
     return render(request, 'recipes.html', {'recipes': recipes})
 
 
 def detailselectedrecipe(request, pk):
-    recipe = controllers.getrecipe(pk)
+    recipe = IngredientRecipe.objects.select_related('ingredient_id').select_related(
+        'measurment_unit_id').select_related('recipe_id').filter(recipe_id=pk)
     name = recipe[0].recipe_id.name
     pax = recipe[0].recipe_id.pax
     category = recipe[0].recipe_id.category_id.name
