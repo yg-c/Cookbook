@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>
+<body>
+<h1>{{name}} :</h1>
+                <p>{{pax}}</p>
+                <p>{{category}}</p>
+                <p>{{course}}</p>
+                <p>{{preparation_time}}</p>
+                <p>{{instructions | linebreaksbr}}</p>
+        {%for ingredient in ingredients%}
+                <p>{{ingredient.ingredient_id.name}} {{ingredient.measurment_unit_id.name}} {{ingredient.quantity}}</p>
+        {% endfor %}
+</body>
+</html>
