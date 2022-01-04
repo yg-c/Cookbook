@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nom</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%for u in units%}
+            <tr>
+                <td>{{u.name}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
