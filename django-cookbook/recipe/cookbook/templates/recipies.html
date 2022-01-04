@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipes</title>
+</head>
+<body>
+<h1>Recipes :</h1>
+        {%for recipe in recipes%}
+<p>
+            <tr>
+                <td>{{recipe.id}}</td>
+                <td>{{recipe.name}}</td>
+                <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a></td>
+            </tr>
+        {% endfor %}
+</p>
+</body>
+</html>
