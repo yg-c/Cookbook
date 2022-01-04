@@ -30,7 +30,7 @@ VALUES (1, 'Oeuf'),
        (17, 'Basilic thaï')
 ;
 
-INSERT INTO measurment_unit (id, name)
+INSERT INTO measurement_unit (id, name)
 VALUES (1, 'Pièce'),
        (2, 'Décilitre'),
        (3, 'Gramme'),
@@ -51,7 +51,7 @@ VALUES(1, 'Crêpes', 1, 1,3, 150, 'Mélanger le tout au robot ménager afin d''�
            '\n Ajouter la sauce de soja, la sauce aux huîtres, la sauce poisson et le sucre. Faire sauter quelques secondes.')
 ;
 
-INSERT INTO ingredient_recipe(id, recipe_id, ingredient_id, quantity, measurment_unit_id)
+INSERT INTO ingredient_recipe(id, recipe_id, ingredient_id, quantity, measurement_unit_id)
 VALUES (1, 1, 1, 3, 1),
        (2, 1, 2, 1.5, 2),
        (3, 1, 3, 1.5, 2),
@@ -81,7 +81,7 @@ FROM recipe recipe
          JOIN category category on recipe.category_id = category.id
          JOIN ingredient_recipe ingredient_recipe on recipe.id = ingredient_recipe.recipe_id
          JOIN ingredient ingredient on ingredient_recipe.ingredient_id = ingredient.id
-         JOIN measurment_unit unit on ingredient_recipe.measurment_unit_id = unit.id
+         JOIN measurement_unit unit on ingredient_recipe.measurement_unit_id = unit.id
          JOIN course course on recipe.course_id = course.id
 WHERE recipe.id = 2
 ;
