@@ -1,5 +1,6 @@
 from django.urls import path
-import views
+from cookbook import views
+
 
 urlpatterns = [
     path('', views.index, name='index'),
