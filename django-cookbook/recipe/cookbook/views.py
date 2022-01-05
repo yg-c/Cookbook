@@ -24,10 +24,10 @@ def updateunit(request, pk):
 
     # pré-remplissage du formulaire avec les données de l'object
     datas = {'id': unit[0].id, 'name': unit[0].name}
-    form = UnitForm(datas)
+    form = UpdateUnitForm(datas)
 
     if request.method == 'POST':
-        form = UnitForm(request.POST)
+        form = UpdateUnitForm(request.POST)
         if form.is_valid():
             unit_id = form.cleaned_data['id']
             name = form.cleaned_data['name']
@@ -44,15 +44,14 @@ def updateunit(request, pk):
 
 def addunit(request):
     # Ne gère pas l'écriture automatique de l'id
-    form = UnitForm()
+    form = AddUnitForm()
     if request.method == 'POST':
-        form = UnitForm(request.POST)
+        form = AddUnitForm(request.POST)
         if form.is_valid():
-            unit_id = form.cleaned_data['id']
             name = form.cleaned_data['name']
 
             # écriture dans la base de donnée
-            unit = MeasurementUnit(id=unit_id, name=name)
+            unit = MeasurementUnit(name=name)
             unit.save(using='default')
 
             # renvoie de la liste
