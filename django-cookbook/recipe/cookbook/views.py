@@ -29,17 +29,36 @@ def updateunit(request, pk):
     if request.method == 'POST':
         form = UnitForm(request.POST)
         if form.is_valid():
-            id = form.cleaned_data['id']
+            unit_id = form.cleaned_data['id']
             name = form.cleaned_data['name']
 
             # écriture dans la base de donnée
-            unit = MeasurementUnit(id=id, name=name)
+            unit = MeasurementUnit(id=unit_id, name=name)
             unit.save(using='default')
 
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/units')
 
     return render(request, 'updateunit.html', {'form': form})
+
+
+def addunit(request):
+    # Ne gère pas l'écriture automatique de l'id
+    form = UnitForm()
+    if request.method == 'POST':
+        form = UnitForm(request.POST)
+        if form.is_valid():
+            unit_id = form.cleaned_data['id']
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            unit = MeasurementUnit(id=unit_id, name=name)
+            unit.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/units')
+
+    return render(request, 'addunit.html', {'form': form})
 
 
 # Recipes
