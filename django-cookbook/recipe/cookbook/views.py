@@ -39,7 +39,7 @@ def updateunit(request, pk):
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/units')
 
-    return render(request, 'cookbooks/updateunit.html', {'form': form})
+    return render(request, 'cookbook/updateunit.html', {'form': form})
 
 
 # Recipes
