@@ -61,7 +61,6 @@ def addunit(request):
 
 
 def deleteunit(request, pk):
-    print(pk)
     MeasurementUnit.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/units')
 
