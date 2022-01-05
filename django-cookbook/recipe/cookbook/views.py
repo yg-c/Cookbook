@@ -1,12 +1,14 @@
-# from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .models import *
+from .forms import *
 
 
 def index(request):
     return render(request, 'index.html')
 
 
+# Units
 def measurmentunits(request):
     units = MeasurementUnit.objects.using('default')
     return render(request, 'units.html', {'units': units})
@@ -17,6 +19,30 @@ def measurmentunit(request, pk):
     return render(request, 'unit.html', {'unit': unit})
 
 
+def updateunit(request, pk):
+    unit = MeasurementUnit.objects.using('default').filter(id=pk)
+
+    # pré-remplissage du formulaire avec les données de l'object
+    datas = {'id': unit[0].id, 'name': unit[0].name}
+    form = UnitForm(datas)
+
+    if request.method == 'POST':
+        form = UnitForm(request.POST)
+        if form.is_valid():
+            id = form.cleaned_data['id']
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            unit = MeasurementUnit(id=id, name=name)
+            unit.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/units')
+
+    return render(request, 'cookbooks/updateunit.html', {'form': form})
+
+
+# Recipes
 def getallrecipes(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'recipes.html', {'recipes': recipes})
