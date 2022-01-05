@@ -3,7 +3,7 @@ from django.db import models
 
 # Recipe DB
 class MeasurementUnit(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
 
     objects = models.Manager()
@@ -16,7 +16,7 @@ class MeasurementUnit(models.Model):
 
 
 class Category(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
 
     objects = models.Manager()
@@ -29,7 +29,7 @@ class Category(models.Model):
 
 
 class Course(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
 
     objects = models.Manager()
@@ -42,7 +42,7 @@ class Course(models.Model):
 
 
 class Ingredient(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
 
     objects = models.Manager()
@@ -55,7 +55,7 @@ class Ingredient(models.Model):
 
 
 class Recipe(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
     category_id = models.ForeignKey(Category, on_delete=models.CASCADE, db_column='category_id')
     course_id = models.ForeignKey(Course, on_delete=models.CASCADE, db_column='course_id')
@@ -73,7 +73,7 @@ class Recipe(models.Model):
 
 
 class IngredientRecipe(models.Model):
-    id = models.PositiveIntegerField(primary_key=True, db_column='id')
+    id = models.BigAutoField(primary_key=True, db_column='id')
     recipe_id = models.ForeignKey(Recipe, on_delete=models.PROTECT, db_column='recipe_id')
     ingredient_id = models.ForeignKey(Ingredient, on_delete=models.PROTECT, db_column='ingredient_id')
     quantity = models.DecimalField(decimal_places=2, max_digits=15, db_column='quantity')
