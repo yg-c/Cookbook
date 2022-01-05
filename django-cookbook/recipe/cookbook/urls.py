@@ -8,4 +8,5 @@ urlpatterns = [
     path('unit/<int:pk>', views.measurmentunit, name='unit'),
     path('recipes/', views.getallrecipes, name='recipes'),
     path('recipe/<int:pk>', views.detailselectedrecipe, name='recipe'),
+    path('updateunit/<int:pk>', views.updateunit, name='updateunit'),
 ]
