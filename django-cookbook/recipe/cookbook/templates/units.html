@@ -6,20 +6,20 @@
 </head>
 <body>
 <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Nom</th>
-        </tr>
-        </thead>
-        <tbody>
-        {%for u in units%}
-            <tr>
-
-                <td>{{u.name}}</td>
-                <td><a href="../updateunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <thead>
+    <tr>
+        <th scope="col">Nom</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for u in units%}
+    <tr>
+        <td>{{u.name}}</td>
+        <td><a href="../updateunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
+    </tr>
+    {% endfor %}
+    <td><a href="../addunit/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
+    </tbody>
+</table>
 </body>
 </html>
