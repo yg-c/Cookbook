@@ -1,17 +1,17 @@
 CREATE TABLE category(
-                         id int NOT NULL,
+                         id int NOT NULL AUTO_INCREMENT,
                          name varchar(255),
                          PRIMARY KEY (id)
 );
 
 CREATE TABLE course(
-                       id int NOT NULL,
+                       id int NOT NULL AUTO_INCREMENT,
                        name varchar(255),
                        PRIMARY KEY (id)
 );
 
 CREATE TABLE recipe(
-                       id int NOT NULL,
+                       id int NOT NULL AUTO_INCREMENT,
                        name varchar(255),
                        category_id int NOT NULL,
                        course_id int NOT NULL,
@@ -24,19 +24,19 @@ CREATE TABLE recipe(
 );
 
 CREATE TABLE ingredient(
-                           id int NOT NULL,
+                           id int NOT NULL AUTO_INCREMENT,
                            name varchar(255),
                            PRIMARY KEY (id)
 );
 
 CREATE TABLE measurement_unit(
-                               id int NOT NULL,
+                               id int NOT NULL AUTO_INCREMENT AUTO_INCREMENT,
                                name varchar(255),
                                PRIMARY KEY (id)
 );
 
 CREATE TABLE ingredient_recipe(
-                                 id int NOT NULL,
+                                 id int NOT NULL AUTO_INCREMENT,
                                  recipe_id int NOT NULL,
                                  ingredient_id int NOT NULL,
                                  quantity float(10,4),
