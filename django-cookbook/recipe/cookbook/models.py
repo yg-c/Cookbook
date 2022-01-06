@@ -77,7 +77,7 @@ class IngredientRecipe(models.Model):
     recipe_id = models.ForeignKey(Recipe, on_delete=models.PROTECT, db_column='recipe_id')
     ingredient_id = models.ForeignKey(Ingredient, on_delete=models.PROTECT, db_column='ingredient_id')
     quantity = models.DecimalField(decimal_places=2, max_digits=15, db_column='quantity')
-    measurment_unit_id = models.ForeignKey(MeasurementUnit, on_delete=models.PROTECT, db_column='measurement_unit_id')
+    measurement_unit_id = models.ForeignKey(MeasurementUnit, on_delete=models.PROTECT, db_column='measurement_unit_id')
 
     objects = models.Manager()
 

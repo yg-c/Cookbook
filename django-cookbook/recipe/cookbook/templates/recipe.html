@@ -12,7 +12,7 @@
                 <p>{{preparation_time}}</p>
                 <p>{{instructions | linebreaksbr}}</p>
         {%for ingredient in ingredients%}
-                <p>{{ingredient.ingredient_id.name}} {{ingredient.measurment_unit_id.name}} {{ingredient.quantity}}</p>
+                <p>{{ingredient.ingredient_id.name}} {{ingredient.measurement_unit_id.name}} {{ingredient.quantity}}</p>
         {% endfor %}
 </body>
 </html>

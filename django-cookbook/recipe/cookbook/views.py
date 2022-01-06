@@ -9,12 +9,12 @@ def index(request):
 
 
 # Units
-def measurmentunits(request):
+def measurementunits(request):
     units = MeasurementUnit.objects.using('default')
     return render(request, 'units.html', {'units': units})
 
 
-def measurmentunit(request, pk):
+def measurementunit(request, pk):
     unit = MeasurementUnit.objects.using('default').filter(id=pk)
     return render(request, 'unit.html', {'unit': unit})
 
@@ -43,7 +43,6 @@ def updateunit(request, pk):
 
 
 def addunit(request):
-    # Ne gère pas l'écriture automatique de l'id
     form = AddUnitForm()
     if request.method == 'POST':
         form = AddUnitForm(request.POST)
@@ -73,7 +72,7 @@ def getallrecipes(request):
 
 def detailselectedrecipe(request, pk):
     recipe = IngredientRecipe.objects.select_related('ingredient_id').select_related(
-        'measurment_unit_id').select_related('recipe_id').filter(recipe_id=pk)
+        'measurement_unit_id').select_related('recipe_id').filter(recipe_id=pk)
     name = recipe[0].recipe_id.name
     pax = recipe[0].recipe_id.pax
     category = recipe[0].recipe_id.category_id.name
