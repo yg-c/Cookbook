@@ -141,3 +141,7 @@ dmypy.json
 
 # Migrations
 django-cookbook/recipe/cookbook/migrations/__init__.py
+
+# dotenv
+.dotenv
+!.dotenv.example
