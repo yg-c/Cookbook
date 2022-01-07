@@ -4,11 +4,14 @@ from .models import *
 from .forms import *
 
 
+# region index
 def index(request):
     return render(request, 'index.html')
 
+# endregion index
 
-# Units
+
+# region units
 def measurementunits(request):
     units = MeasurementUnit.objects.using('default')
     return render(request, 'units.html', {'units': units})
@@ -63,8 +66,10 @@ def deleteunit(request, pk):
     MeasurementUnit.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/units')
 
+# endregion Units
 
-# Recipes
+
+# region recipes
 def getallrecipes(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'recipes.html', {'recipes': recipes})
@@ -84,8 +89,12 @@ def detailselectedrecipe(request, pk):
                   {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
 
+# endregion recipes
 
-# Ingredients
+
+# region ingredients
 def getallingredients(request):
     ingredients = Ingredient.objects.using('default')
     return render(request, 'units.html', {'units': ingredients})
+
+# endregion ingredients
