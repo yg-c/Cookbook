@@ -83,3 +83,9 @@ def detailselectedrecipe(request, pk):
     return render(request, 'recipe.html',
                   {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
+
+
+# Ingredients
+def allingredients(request):
+    ingredients = Ingredient.objects.using('default')
+    return render(request, 'units.html', {'units': ingredients})
