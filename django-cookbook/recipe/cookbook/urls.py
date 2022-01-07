@@ -11,4 +11,6 @@ urlpatterns = [
     path('updateunit/<int:pk>', views.updateunit, name='updateunit'),
     path('addunit/', views.addunit, name='addunit'),
     path('deleteunit/<int:pk>', views.deleteunit, name='deleteunit'),
+    path('ingredients/', views.getallingredients, name='ingredients'),
+
 ]
