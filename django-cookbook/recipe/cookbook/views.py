@@ -95,6 +95,6 @@ def detailselectedrecipe(request, pk):
 # region ingredients
 def getallingredients(request):
     ingredients = Ingredient.objects.using('default')
-    return render(request, 'units.html', {'units': ingredients})
+    return render(request, 'ingredients.html', {'ingredients': ingredients})
 
 # endregion ingredients
