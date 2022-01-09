@@ -12,5 +12,6 @@ urlpatterns = [
     path('addunit/', views.addunit, name='addunit'),
     path('deleteunit/<int:pk>', views.deleteunit, name='deleteunit'),
     path('ingredients/', views.getallingredients, name='ingredients'),
+    path('courses/', views.getallcourses, name='courses')
 
 ]

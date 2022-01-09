@@ -98,3 +98,8 @@ def getallingredients(request):
     return render(request, 'ingredients.html', {'ingredients': ingredients})
 
 # endregion ingredients
+
+# region courses
+def getallcourses(request):
+    courses = Course.objects.using('default')
+    return render(request, 'courses.html', {'courses': courses})
