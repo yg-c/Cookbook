@@ -2,7 +2,7 @@ from dotenv import dotenv_values  # pip install python-dotenv
 import mysql.connector  # pip install mysql-connector-python
 from sqlqueries import *
 
-config = dotenv_values('.env')
+config = dotenv_values('django-cookbook/database/.env')
 cnx = mysql.connector.connect(user=config['USER'], password=config['PASSWORD'],
                               host=config['HOST'],
                               database=config['DATABASE'],
