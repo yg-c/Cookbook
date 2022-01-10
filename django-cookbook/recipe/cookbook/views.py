@@ -112,8 +112,8 @@ def addcourse(request):
             name = form.cleaned_data['name']
 
             # écriture dans la base de donnée
-            unit = Course(name=name)
-            unit.save(using='default')
+            course = Course(name=name)
+            course.save(using='default')
 
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/courses')
