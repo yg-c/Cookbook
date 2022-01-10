@@ -1,7 +1,6 @@
 from django.urls import path
 from cookbook import views
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('units/', views.measurementunits, name='units'),
@@ -12,7 +11,7 @@ urlpatterns = [
     path('addunit/', views.addunit, name='addunit'),
     path('deleteunit/<int:pk>', views.deleteunit, name='deleteunit'),
     path('ingredients/', views.getallingredients, name='ingredients'),
+    path('addingredient/', views.addingredient, name='addingredient'),
     path('courses/', views.getallcourses, name='courses'),
     path('addcourse/', views.addcourse, name='addcourse')
-
 ]
