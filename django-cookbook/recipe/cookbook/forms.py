@@ -20,3 +20,9 @@ class UpdateIngredientForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
 # endregion ingredients
+
+# region courses
+class AddCourseForm(forms.Form):
+    name = forms.CharField(label='Nom', max_length=100)
+
+# endregion courses
