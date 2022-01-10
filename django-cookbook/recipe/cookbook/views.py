@@ -102,7 +102,18 @@ def getallingredients(request):
 
 
 def addingredient(request):
+    form = AddIngredientForm()
+    if request.method == 'POST':
+        form = AddIngredientForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
 
+            # écriture dans la base de donnée
+            ingredient = MeasurementUnit(name=name)
+            ingredient.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/ingredients')
     return render(request, 'addingredient.html')
 
 
