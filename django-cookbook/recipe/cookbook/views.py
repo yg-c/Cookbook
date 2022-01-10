@@ -103,3 +103,22 @@ def getallingredients(request):
 def getallcourses(request):
     courses = Course.objects.using('default')
     return render(request, 'courses.html', {'courses': courses})
+
+def addcourse(request):
+    form = AddCourseForm()
+    if request.method == 'POST':
+        form = AddCourseForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            unit = Course(name=name)
+            unit.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/courses')
+
+    return render(request, 'addcourse.html', {'form': form})
+
+
+    #endregion courses
