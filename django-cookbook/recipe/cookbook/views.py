@@ -109,7 +109,7 @@ def addingredient(request):
             name = form.cleaned_data['name']
 
             # écriture dans la base de donnée
-            ingredient = MeasurementUnit(name=name)
+            ingredient = Ingredient(name=name)
             ingredient.save(using='default')
 
             # renvoie de la liste
