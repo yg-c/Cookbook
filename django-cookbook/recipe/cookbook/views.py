@@ -8,6 +8,7 @@ from .forms import *
 def index(request):
     return render(request, 'index.html')
 
+
 # endregion index
 
 
@@ -66,6 +67,7 @@ def deleteunit(request, pk):
     MeasurementUnit.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/units')
 
+
 # endregion Units
 
 
@@ -89,6 +91,7 @@ def detailselectedrecipe(request, pk):
                   {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
 
+
 # endregion recipes
 
 
@@ -97,12 +100,19 @@ def getallingredients(request):
     ingredients = Ingredient.objects.using('default')
     return render(request, 'ingredients.html', {'ingredients': ingredients})
 
+
+def addingredient(request):
+
+    return render(request, 'addingredient.html')
+
+
 # endregion ingredients
 
 # region courses
 def getallcourses(request):
     courses = Course.objects.using('default')
     return render(request, 'courses.html', {'courses': courses})
+
 
 def addcourse(request):
     form = AddCourseForm()
@@ -120,5 +130,4 @@ def addcourse(request):
 
     return render(request, 'addcourse.html', {'form': form})
 
-
-    #endregion courses
+    # endregion courses
