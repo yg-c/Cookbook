@@ -11,6 +11,7 @@ class UpdateUnitForm(forms.Form):
 class AddUnitForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
+
 # endregion units
 
 
@@ -19,7 +20,12 @@ class UpdateIngredientForm(forms.Form):
     id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     name = forms.CharField(label='Nom', max_length=100)
 
+
+class AddIngredientForm(forms.Form):
+    name = forms.CharField(label='Nom', max_length=100)
+
 # endregion ingredients
+
 
 # region courses
 class AddCourseForm(forms.Form):
