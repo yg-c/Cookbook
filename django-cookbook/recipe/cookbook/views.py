@@ -141,4 +141,8 @@ def addcourse(request):
 
     return render(request, 'addcourse.html', {'form': form})
 
+def deletecourse(request, pk):
+    Course.objects.using('default').filter(id=pk).delete()
+    return HttpResponseRedirect('/cookbook/courses')
+
     # endregion courses
