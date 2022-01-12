@@ -16,9 +16,10 @@
     {%for i in courses%}
     <tr>
         <td>{{i.name}}</td>
-            
+        <td><a href="../deletecourse/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Supprimer</a></td>       
     </tr>
     {% endfor %}
-    <td><a href="../addcourse/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>     
+    <td><a href="../addcourse/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>  
+
     </tbody>
 </html>
