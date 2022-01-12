@@ -12,6 +12,7 @@ urlpatterns = [
     path('deleteunit/<int:pk>', views.deleteunit, name='deleteunit'),
     path('ingredients/', views.getallingredients, name='ingredients'),
     path('addingredient/', views.addingredient, name='addingredient'),
+    path('deleteingredient/<int:pk>', views.deleteingredient, name='deleteingredient'),
     path('courses/', views.getallcourses, name='courses'),
     path('addcourse/', views.addcourse, name='addcourse')
 ]
