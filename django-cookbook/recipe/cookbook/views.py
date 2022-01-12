@@ -117,7 +117,12 @@ def addingredient(request):
     return render(request, 'addingredient.html')
 
 
+def deleteingredient(request, pk):
+    Ingredient.objects.using('default').filter(id=pk).delete()
+    return HttpResponseRedirect('/cookbook/ingredients')
+
 # endregion ingredients
+
 
 # region courses
 def getallcourses(request):
