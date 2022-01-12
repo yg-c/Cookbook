@@ -146,6 +146,28 @@ def addcourse(request):
 
     return render(request, 'addcourse.html', {'form': form})
 
+def updatecourse(request, pk):
+    unit = Course.objects.using('default').filter(id=pk)
+
+    # pré-remplissage du formulaire avec les données de l'object
+    datas = {'id': unit[0].id, 'name': unit[0].name}
+    form = UpdateCourseForm(datas)
+
+    if request.method == 'POST':
+        form = UpdateCourseForm(request.POST)
+        if form.is_valid():
+            unit_id = form.cleaned_data['id']
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            unit = Course(id=unit_id, name=name)
+            unit.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/courses')
+
+    return render(request, 'updatecourse.html', {'form': form})
+
 def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/courses')
