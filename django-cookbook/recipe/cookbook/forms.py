@@ -31,4 +31,8 @@ class AddIngredientForm(forms.Form):
 class AddCourseForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
+class UpdateCourseForm(forms.Form):
+    id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    name = forms.CharField(label='Nom', max_length=100)
+
 # endregion courses
