@@ -13,6 +13,7 @@ urlpatterns = [
     path('ingredients/', views.getallingredients, name='ingredients'),
     path('addingredient/', views.addingredient, name='addingredient'),
     path('deleteingredient/<int:pk>', views.deleteingredient, name='deleteingredient'),
+    path('updateingredient/<int:pk>', views.updateingredient, name='updateingredient'),
     path('courses/', views.getallcourses, name='courses'),
     path('addcourse/', views.addcourse, name='addcourse'),
     path('updatecourse/<int:pk>', views.updatecourse, name='updatecourse'),
