@@ -11,7 +11,6 @@ class UpdateUnitForm(forms.Form):
 class AddUnitForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
-
 # endregion units
 
 
