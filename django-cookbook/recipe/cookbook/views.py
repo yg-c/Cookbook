@@ -121,6 +121,30 @@ def deleteingredient(request, pk):
     Ingredient.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/ingredients')
 
+
+def updateingredient(request, pk):
+    ingredient = Ingredient.objects.using('default').filter(id=pk)
+
+    # pré-remplissage du formulaire avec les données de l'object
+    datas = {'id': ingredient[0].id, 'name': ingredient[0].name}
+    form = UpdateIngredientForm(datas)
+
+    if request.method == 'POST':
+        form = UpdateIngredientForm(request.POST)
+        if form.is_valid():
+            ingredient_id = form.cleaned_data['id']
+            ingredient_name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            ingredient = Ingredient(id=ingredient_id, name=ingredient_name)
+            ingredient.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/ingredients')
+
+    return render(request, 'updateingredient.html', {'form': form})
+
+
 # endregion ingredients
 
 
@@ -146,6 +170,7 @@ def addcourse(request):
 
     return render(request, 'addcourse.html', {'form': form})
 
+
 def updatecourse(request, pk):
     unit = Course.objects.using('default').filter(id=pk)
 
@@ -167,6 +192,7 @@ def updatecourse(request, pk):
         return HttpResponseRedirect('/cookbook/courses')
 
     return render(request, 'updatecourse.html', {'form': form})
+
 
 def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
