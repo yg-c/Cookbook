@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CookBook</title>
-</head>
+{% extends "./base.html" %}
+{% block body_block %}
+<title>CookBook</title>
 <body>
 <h1>Index</h1>
 <a href="./units">Unités</a>
@@ -11,4 +9,4 @@
 <a href="./ingredients">Ingrédients</a>
 <a href="./courses">Plats</a>
 </body>
-</html>
+{% endblock %}
