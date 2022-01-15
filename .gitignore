@@ -150,3 +150,7 @@ django-cookbook/recipe/cookbook/migrations/__init__.py
 # .env
 .env
 !.env.example
+
+# node_modules
+node_modules/
+package-lock.json
