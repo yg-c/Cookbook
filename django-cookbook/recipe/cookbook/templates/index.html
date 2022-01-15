@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-{% extends "./base.html" %}
+{% extends "base.html" %}
 {% block body_block %}
 <title>CookBook</title>
 <body>
-<h1>Index</h1>
-<a href="./units">Unités</a>
-<a href="./recipes">Recettes</a>
-<a href="./ingredients">Ingrédients</a>
-<a href="./courses">Plats</a>
+{%for recipe in recipes%}
+<div class="card-columns">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{recipe.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">?Plat?</h6>
+            <p class="card-text">?text?.</p>
+            <a href="recipe/{{ recipe.id }}" class="card-link">Détails</a>
+        </div>
+    </div>
+</div>
+{% endfor %}
 </body>
 {% endblock %}
