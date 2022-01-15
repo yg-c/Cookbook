@@ -6,8 +6,8 @@ from .forms import *
 
 # region index
 def index(request):
-    return render(request, 'index.html')
-
+    recipes = Recipe.objects.using('default')
+    return render(request, 'index.html', {'recipes': recipes})
 
 # endregion index
 
