@@ -199,3 +199,55 @@ def deletecourse(request, pk):
     return HttpResponseRedirect('/cookbook/courses')
 
     # endregion courses
+
+# region categories
+def getallcategories(request):
+    categories = Category.objects.using('default')
+    return render(request, 'categories.html', {'categories' : categories})
+
+
+def addcategory(request):
+    form = AddCategoryForm()
+    if request.method == 'POST':
+        form = AddCategoryForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            category = Category(name=name)
+            category.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/categories')
+
+    return render(request, 'addcategory.html', {'form': form})
+
+
+def updatecategory(request, pk):
+    unit = Category.objects.using('default').filter(id=pk)
+
+    # pré-remplissage du formulaire avec les données de l'object
+    datas = {'id': unit[0].id, 'name': unit[0].name}
+    form = UpdateCategoryForm(datas)
+
+    if request.method == 'POST':
+        form = UpdateCategoryForm(request.POST)
+        if form.is_valid():
+            unit_id = form.cleaned_data['id']
+            name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+            unit = Category(id=unit_id, name=name)
+            unit.save(using='default')
+
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/categories')
+
+    return render(request, 'updatecategory.html', {'form': form})
+
+
+def deletecategory(request, pk):
+    Category.objects.using('default').filter(id=pk).delete()
+    return HttpResponseRedirect('/cookbook/categories')
+
+# endregion categories

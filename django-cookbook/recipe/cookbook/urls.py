@@ -17,5 +17,9 @@ urlpatterns = [
     path('courses/', views.getallcourses, name='courses'),
     path('addcourse/', views.addcourse, name='addcourse'),
     path('updatecourse/<int:pk>', views.updatecourse, name='updatecourse'),
-    path('deletecourse/<int:pk>', views.deletecourse, name='deletecourse')
+    path('deletecourse/<int:pk>', views.deletecourse, name='deletecourse'),
+    path('categories/', views.getallcategories, name='categories'),
+    path('addcategory/', views.addcategory, name='addcategory'),
+    path('updatecategory/<int:pk>', views.updatecategory, name='updatecategory'),
+    path('deletecategory/<int:pk>', views.deletecategory, name='deletecategory')
 ]

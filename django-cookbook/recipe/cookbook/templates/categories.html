@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Catégories</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Nom</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for category in categories%}
+    <tr>
+        <td>{{category.name}}</td>
+        <td><a href="../updatecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
+        <td><a href="../deletecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Supprimer</a></td>
+    </tr>
+    {% endfor %}
+    <td><a href="../addcategory/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>  
+
+    </tbody>
+</html>

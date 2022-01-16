@@ -35,3 +35,13 @@ class UpdateCourseForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
 # endregion courses
+
+# region categories
+class AddCategoryForm(forms.Form):
+    name = forms.CharField(label='Nom', max_length=100)
+
+class UpdateCategoryForm(forms.Form):
+    id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
+    name = forms.CharField(label='Nom', max_length=100)
+
+# endregion categories
