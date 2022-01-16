@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+{% extends "base.html" %}
+{% block body_block %}
+<title>Unités</title>
 </head>
 <body>
+<h1>Unités</h1>
+    <td><a href="../addunit/" class="btn btn-primary" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
 <table class="table">
     <thead>
     <tr>
@@ -16,11 +16,10 @@
     <tr>
         <td>{{u.name}}</td>
         <td><a href="../updateunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
-        <td><a href="../deleteunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Supprimer</a></td>
+        <td><a href="../deleteunit/{{u.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a></td>
     </tr>
     {% endfor %}
-    <td><a href="../addunit/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
     </tbody>
 </table>
 </body>
-</html>
+{% endblock %}
