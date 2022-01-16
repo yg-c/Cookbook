@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block body_block %}
 <head>
-    <meta charset="UTF-8">
+
     <title>Title</title>
 </head>
 <body>
 <h1>Ingrédients</h1>
+<td><a href="../addingredient/" class="btn btn-primary" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
 <table class="table">
     <thead>
     <tr>
@@ -17,10 +18,10 @@
     <tr>
         <td>{{i.name}}</td>
         <td><a href="../updateingredient/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
-        <td><a href="../deleteingredient/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Supprimer</a></td>
+        <td><a href="../deleteingredient/{{i.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a></td>
     </tr>
     {% endfor %}
-    <td><a href="../addingredient/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
-
     </tbody>
-</html>
+</table>
+</body>
+{% endblock %}
