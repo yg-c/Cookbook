@@ -91,7 +91,6 @@ def detailselectedrecipe(request, pk):
                   {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
 
-
 # endregion recipes
 
 
