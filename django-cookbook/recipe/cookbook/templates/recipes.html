@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+{% extends "base.html" %}
+{% block body_block %}
     <title>Recipes</title>
-</head>
+
 <body>
 <h1>Recipes :</h1>
         {%for recipe in recipes%}
@@ -16,4 +14,4 @@
         {% endfor %}
 </p>
 </body>
-</html>
+{% endblock %}
