@@ -3,15 +3,22 @@
     <title>Recipes</title>
 
 <body>
-<h1>Recipes :</h1>
+<h1>Recettes :</h1>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {%for recipe in recipes%}
-<p>
             <tr>
-                <td>{{recipe.id}}</td>
                 <td>{{recipe.name}}</td>
                 <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a></td>
             </tr>
         {% endfor %}
-</p>
+    </tbody>
+</table>
 </body>
 {% endblock %}
