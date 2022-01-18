@@ -4,26 +4,26 @@
     <title>Ingredients</title>
 </head>
 <body>
-<h1>Ingrédients</h1>
-<a href="../addingredient/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Nom</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    {%for i in ingredients%}
-    <tr>
-        <td>{{i.name}}</td>
-        <td>
-            <a href="../updateingredient/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
-            <a href="../deleteingredient/{{i.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
-        </td>
-    </tr>
-    {% endfor %}
-    </tbody>
-</table>
+    <h1>Ingrédients</h1>
+    <a href="../addingredient/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {%for i in ingredients%}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>
+                <a href="../updateingredient/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
+                <a href="../deleteingredient/{{i.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 </body>
 {% endblock %}
