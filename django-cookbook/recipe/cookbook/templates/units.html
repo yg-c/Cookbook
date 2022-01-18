@@ -1,48 +1,51 @@
 {% extends "base.html" %}
 {% block body_block %}
-<title>Unités</title>
+<head>
+    <title>Unités</title>
 </head>
 <body>
 <h1>Unités</h1>
-<td><a href="../addunit/" class="btn btn-primary" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>
-<table class="table">
+<a href="../addunit/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
+<table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     {%for u in units%}
     <tr>
-        <td>{{u.name}}  </td>
+        <td>{{u.name}}</td>
         <td>
             <a href="../updateunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
             <button type="button" onclick="toDelete('{{ u.id }}', '{{ u.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
         </td>
     </tr>
     {% endfor %}
-    <!-- Modal delete-->
-    <div class="modal fade" id="delete" role="dialog">
-        <div class="modal-dialog">
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 align="left" class="modal-title">Supprimer</h2>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <span hidden="hidden" id="deleteUnitNumber"></span>
-                    <p>Voulez-vous supprimer l'unité <span id="deleteUnitName"></span> ? </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                    <a id="deleteButton" href="" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
-                </div>
+    </tbody>
+</table>
+<!-- Modal delete-->
+<div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 align="left" class="modal-title">Supprimer</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span hidden="hidden" id="deleteUnitNumber"></span>
+                <p>Voulez-vous supprimer l'unité <span id="deleteUnitName"></span> ? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a id="deleteButton" href="" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
             </div>
         </div>
     </div>
-    </tbody>
-</table>
+</div>
+
 </body>
 <script>
     function toDelete(id, name) {
