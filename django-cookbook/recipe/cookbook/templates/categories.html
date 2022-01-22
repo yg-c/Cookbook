@@ -19,10 +19,41 @@
         <td>{{category.name}}</td>
         <td>
             <a href="../updatecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
-            <a href="../deletecategory/{{category.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+            <button type="button" onclick="toDelete('{{ category.id }}', '{{ category.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
         </td>
     </tr>
     {% endfor %}
     </tbody>
 </table>
+<!-- Modal delete-->
+<div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 align="left" class="modal-title">Supprimer</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span hidden="hidden" id="deleteCategoryNumber"></span>
+                <p>Voulez-vous supprimer la catégorie <span id="deleteCategoryName"></span> ? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a id="deleteButton" href="" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal JavaScript-->
+<script>
+    function toDelete(id, name) {
+            let categoryid = document.getElementById("deleteCategoryNumber");
+            let categoryname = document.getElementById("deleteCategoryName");
+            let deleteButton = document.getElementById("deleteButton");
+            categoryid.innerHTML=id;
+            categoryname.innerHTML=name;
+            deleteButton.href="../deletecategory/"+id;
+        }
+</script>
 {% endblock %}
