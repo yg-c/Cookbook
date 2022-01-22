@@ -15,10 +15,43 @@
         {%for recipe in recipes%}
             <tr>
                 <td>{{recipe.name}}</td>
-                <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a></td>
+                <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
+                 <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
+                </td>
             </tr>
         {% endfor %}
     </tbody>
 </table>
+<!-- Modal delete-->
+<div class="modal fade" id="delete" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 align="left" class="modal-title">Supprimer</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span hidden="hidden" id="deleteRecipeNumber"></span>
+                <p>Voulez-vous supprimer la recette <span id="deleteRecipeName"></span> ? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a id="deleteButton" href="" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+<script>
+<!-- Modal JavaScript-->
+    function toDelete(id, name) {
+            let recipeid = document.getElementById("deleteRecipeNumber");
+            let recipename = document.getElementById("deleteRecipeName");
+            let deleteButton = document.getElementById("deleteButton");
+            recipeid.innerHTML=id;
+            recipename.innerHTML=name;
+            deleteButton.href="../deleterecipe/"+id;
+        }
+</script>
 {% endblock %}
