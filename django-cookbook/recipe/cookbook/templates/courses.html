@@ -10,14 +10,17 @@
     <thead>
     <tr>
         <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     {%for i in courses%}
     <tr>
         <td>{{i.name}}</td>
-        <td><a href="../updatecourse/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
-        <td><a href="../deletecourse/{{i.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a></td>
+        <td>
+            <a href="../updatecourse/{{i.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
+            <a href="../deletecourse/{{i.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+        </td>
     </tr>
     {% endfor %}
     </tbody>
