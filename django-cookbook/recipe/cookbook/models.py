@@ -57,8 +57,8 @@ class Ingredient(models.Model):
 class Recipe(models.Model):
     id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
-    category_id = models.ForeignKey(Category, on_delete=models.CASCADE, db_column='category_id')
-    course_id = models.ForeignKey(Course, on_delete=models.CASCADE, db_column='course_id')
+    category_id = models.ForeignKey(Category, on_delete=models.PROTECT, db_column='category_id')
+    course_id = models.ForeignKey(Course, on_delete=models.PROTECT, db_column='course_id')
     pax = models.PositiveIntegerField(db_column='pax')
     preparation_time = models.PositiveIntegerField(db_column='preparation_time')
     instructions = models.TextField(db_column='instructions')
@@ -74,7 +74,7 @@ class Recipe(models.Model):
 
 class IngredientRecipe(models.Model):
     id = models.BigAutoField(primary_key=True, db_column='id')
-    recipe_id = models.ForeignKey(Recipe, on_delete=models.PROTECT, db_column='recipe_id')
+    recipe_id = models.ForeignKey(Recipe, on_delete=models.CASCADE, db_column='recipe_id')
     ingredient_id = models.ForeignKey(Ingredient, on_delete=models.PROTECT, db_column='ingredient_id')
     quantity = models.DecimalField(decimal_places=2, max_digits=15, db_column='quantity')
     measurement_unit_id = models.ForeignKey(MeasurementUnit, on_delete=models.PROTECT, db_column='measurement_unit_id')
