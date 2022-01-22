@@ -11,13 +11,29 @@ def index(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'index.html', {'recipes': recipes})
 
+
 # endregion index
 
 
 # region units
 def measurementunits(request):
     units = MeasurementUnit.objects.using('default')
-    return render(request, 'units.html', {'units': units})
+
+    # unités utilisées dans une recette
+    units_ids = list(units.values_list('id', flat=True))
+    ingredient_recipe_units = IngredientRecipe.objects.filter(measurement_unit_id__in=units_ids)
+    unit_used = list(ingredient_recipe_units.values_list('measurement_unit_id', flat=True))
+    # remove duplicates
+    unit_used = dict.fromkeys(unit_used)
+    unit_used = list(unit_used)
+
+    for unit in units:
+        if unit.id in unit_used:
+            unit.used = 1
+        else:
+            unit.used = 0
+
+    return render(request, 'units.html', {'units': units, 'unit_used': unit_used})
 
 
 def measurementunit(request, pk):
@@ -72,6 +88,7 @@ def deleteunit(request, pk):
     except ProtectedError:
         return HttpResponseRedirect('/cookbook/units')
 
+
 # endregion Units
 
 
@@ -99,6 +116,7 @@ def detailselectedrecipe(request, pk):
 def deleterecipe(request, pk):
     Recipe.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/recipes')
+
 
 # endregion recipes
 
@@ -208,10 +226,11 @@ def deletecourse(request, pk):
 
     # endregion courses
 
+
 # region categories
 def getallcategories(request):
     categories = Category.objects.using('default')
-    return render(request, 'categories.html', {'categories' : categories})
+    return render(request, 'categories.html', {'categories': categories})
 
 
 def addcategory(request):

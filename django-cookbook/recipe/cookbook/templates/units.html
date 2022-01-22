@@ -8,10 +8,10 @@
 <a href="../addunit/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
 <table class="table table-hover">
     <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Actions</th>
-        </tr>
+    <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
+    </tr>
     </thead>
     <tbody>
     {%for u in units%}
@@ -19,7 +19,13 @@
         <td>{{u.name}}</td>
         <td>
             <a href="../updateunit/{{u.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
+
+            {% if u.used == 0 %}
             <button type="button" onclick="toDelete('{{ u.id }}', '{{ u.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
+            {% else %}
+            <button type="button" onclick="toDelete('{{ u.id }}', '{{ u.name }}')" class="btn btn-danger" data-toggle="modal" disabled="disabled" data-target="#delete">Supprimer</button>
+            {% endif %}
+
         </td>
     </tr>
     {% endfor %}

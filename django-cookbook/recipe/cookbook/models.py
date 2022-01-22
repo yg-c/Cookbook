@@ -5,6 +5,7 @@ from django.db import models
 class MeasurementUnit(models.Model):
     id = models.BigAutoField(primary_key=True, db_column='id')
     name = models.CharField(max_length=200, db_column='name')
+    used = ''
 
     objects = models.Manager()
 
