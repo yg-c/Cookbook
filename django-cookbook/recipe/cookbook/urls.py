@@ -7,6 +7,7 @@ urlpatterns = [
     path('unit/<int:pk>', views.measurementunit, name='unit'),
     path('recipes/', views.getallrecipes, name='recipes'),
     path('recipe/<int:pk>', views.detailselectedrecipe, name='recipe'),
+    path('deleterecipe/<int:pk>', views.deleterecipe, name='deleterecipe'),
     path('updateunit/<int:pk>', views.updateunit, name='updateunit'),
     path('addunit/', views.addunit, name='addunit'),
     path('deleteunit/<int:pk>', views.deleteunit, name='deleteunit'),
