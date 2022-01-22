@@ -1,26 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block body_block %}
 <head>
-    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <h1>Catégories</h1>
-<table class="table">
+<a href="../addcategory/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
+<table class="table table-hover">
     <thead>
     <tr>
         <th scope="col">Nom</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     {%for category in categories%}
     <tr>
         <td>{{category.name}}</td>
-        <td><a href="../updatecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a></td>
-        <td><a href="../deletecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Supprimer</a></td>
+        <td>
+            <a href="../updatecategory/{{category.id}}" class="btn btn-warning" role="button" aria-pressed="true">Modifier</a>
+            <a href="../deletecategory/{{category.id}}" class="btn btn-danger" role="button" aria-pressed="true">Supprimer</a>
+        </td>
     </tr>
     {% endfor %}
-    <td><a href="../addcategory/" class="btn btn-warning" role="btn btn-primary" aria-pressed="true">Ajouter</a></td>  
-
     </tbody>
-</html>
+</table>
+{% endblock %}
