@@ -10,8 +10,6 @@ from django.db.models import ProtectedError
 def index(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'index.html', {'recipes': recipes})
-
-
 # endregion index
 
 
@@ -33,7 +31,7 @@ def measurementunits(request):
         else:
             unit.used = 0
 
-    return render(request, 'units.html', {'units': units, 'unit_used': unit_used})
+    return render(request, 'units.html', {'units': units})
 
 
 def measurementunit(request, pk):
@@ -87,8 +85,6 @@ def deleteunit(request, pk):
         return HttpResponseRedirect('/cookbook/units')
     except ProtectedError:
         return HttpResponseRedirect('/cookbook/units')
-
-
 # endregion Units
 
 
@@ -116,14 +112,27 @@ def detailselectedrecipe(request, pk):
 def deleterecipe(request, pk):
     Recipe.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/recipes')
-
-
 # endregion recipes
 
 
 # region ingredients
 def getallingredients(request):
     ingredients = Ingredient.objects.using('default')
+
+    # ingrédients utilisés dans une recette
+    ingredients_ids = list(ingredients.values_list('id', flat=True))
+    ingredient_recipe_units = IngredientRecipe.objects.filter(ingredient_id__in=ingredients_ids)
+    ingredients_used = list(ingredient_recipe_units.values_list('ingredient_id', flat=True))
+    # remove duplicates
+    ingredients_used = dict.fromkeys(ingredients_used)
+    ingredients_used = list(ingredients_used)
+
+    for ingredient in ingredients:
+        if ingredient.id in ingredients_used:
+            ingredient.used = 1
+        else:
+            ingredient.used = 0
+
     return render(request, 'ingredients.html', {'ingredients': ingredients})
 
 
@@ -144,8 +153,11 @@ def addingredient(request):
 
 
 def deleteingredient(request, pk):
-    Ingredient.objects.using('default').filter(id=pk).delete()
-    return HttpResponseRedirect('/cookbook/ingredients')
+    try:
+        Ingredient.objects.using('default').filter(id=pk).delete()
+        return HttpResponseRedirect('/cookbook/ingredients')
+    except ProtectedError:
+        return HttpResponseRedirect('/cookbook/ingredients')
 
 
 def updateingredient(request, pk):
@@ -169,8 +181,6 @@ def updateingredient(request, pk):
         return HttpResponseRedirect('/cookbook/ingredients')
 
     return render(request, 'updateingredient.html', {'form': form})
-
-
 # endregion ingredients
 
 
@@ -223,8 +233,7 @@ def updatecourse(request, pk):
 def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/courses')
-
-    # endregion courses
+# endregion courses
 
 
 # region categories
@@ -276,5 +285,4 @@ def updatecategory(request, pk):
 def deletecategory(request, pk):
     Category.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/categories')
-
 # endregion categories
