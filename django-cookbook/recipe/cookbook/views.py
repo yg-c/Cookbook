@@ -1,7 +1,5 @@
-from django.core.checks import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .models import *
 from .forms import *
 from django.db.models import ProtectedError
 
