@@ -6,13 +6,10 @@
 <div class="container">
     <h1>Ajout d'une catégorie</h1>
     <form class="col-md-offset-0 col-md-6" action="" method="post">
-
-        <p>
         <div class="form-group">
             <label for="id_name">Description :</label>
             <input id="id_name" type="text" class="form-control" name="name" value="{{ form.name.value }}" maxlength="100" required="">
         </div>
-        </p>
         <input type="submit" class="btn btn-primary" value="Ajouter">
         <!--token de Cross-Site Request Forgery, protège des données d'entrées-->
         {%csrf_token%}
