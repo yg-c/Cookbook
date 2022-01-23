@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Recipes</title>
-</head>
+{% extends "base.html" %}
+{% block body_block %}
 <body>
 <h1>{{name}} :</h1>
                 <p>{{pax}}</p>
@@ -15,4 +11,4 @@
                 <p>{{ingredient.ingredient_id.name}} {{ingredient.measurement_unit_id.name}} {{ingredient.quantity}}</p>
         {% endfor %}
 </body>
-</html>
+{% endblock %}
