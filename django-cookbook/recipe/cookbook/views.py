@@ -185,6 +185,21 @@ def updateingredient(request, pk):
 # region courses
 def getallcourses(request):
     courses = Course.objects.using('default')
+
+    # courses utilisées dans une recette
+    courses_ids = list(courses.values_list('id', flat=True))
+    recipe_courses = Recipe.objects.filter(course_id__in=courses_ids)
+    courses_used = list(recipe_courses.values_list('course_id', flat=True))
+    # remove duplicates
+    courses_used = dict.fromkeys(courses_used)
+    courses_used = list(courses_used)
+
+    for course in courses:
+        if course.id in courses_used:
+            course.used = 1
+        else:
+            course.used = 0
+
     return render(request, 'courses.html', {'courses': courses})
 
 
