@@ -110,6 +110,21 @@ def detailselectedrecipe(request, pk):
 def deleterecipe(request, pk):
     Recipe.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/recipes')
+
+def addrecipe(request):
+    form = AddRecipeForm()
+    if request.method == 'POST':
+        form = AddRecipeForm(request.POST)
+#       if form.is_valid():
+#           name = form.cleaned_data['name']
+
+            # écriture dans la base de donnée
+#           ingredient = Ingredient(name=name)
+#            ingredient.save(using='default')
+
+            # renvoie de la liste
+#        return HttpResponseRedirect('/cookbook/recipes')
+    return render(request, 'addrecipe.html')    
 # endregion recipes
 
 
