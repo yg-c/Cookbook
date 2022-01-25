@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block body_block %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head> 
+    
+<title>Ajout recette</title>
+<body>
+<div class="container">
+    <h1>Ajout d'une recette</h1>
+    <form class="col-md-offset-0 col-md-6" action="" method="post">
+        <div class="form-group">
+            <label for="id_nbpeople">Nombre de personnes :</label>
+            <input id="id_nbpeople" type="text" class="form-control" name="nbpeople" value="{{ form.nbpeople.value }}" maxlength="100" required="">
+        </div>
+        <div class="form-group">
+            <label for="id_category">Catégorie :</label>
+            
+            <select id="id_category" name="category">
+                {%for category in categories%}
+                <option value="{{ form.category.value }}">{{category.category_id.name}}</option>
+                {% endfor %}
+            </select>
+
+        </div>
+        <div class="form-group">
+            <label for="id_course">Course :</label>
+            <input id="id_course" type="checkbox" class="form-control" name="course" value="{{ form.course.value }}" maxlength="100" required="">
+        </div>
+        <div class="form-group">
+            <label for="id_preptime">Temps de préparation :</label>
+            <input id="id_preptime" type="text" class="form-control" name="preptime" value="{{ form.preptime.value }}" maxlength="100" required="">
+        </div>
+        <div class="form-group">
+            <label for="id_ingredients">Ingrédients :</label>
+            <script>
+            $(document).ready(function() {
+                var max_fields = 10;
+                var wrapper = $(".container1");
+                var add_button = $(".add_form_field");
+            
+                var x = 1;
+                $(add_button).click(function(e) {
+                    e.preventDefault();
+                    if (x < max_fields) {
+                        x++;
+                        $(wrapper).append('<div><input id="id_ingredients" type="text" class="form-control" name="ingredients"><a href="#" class="delete">Delete</a></div>'); //add input box
+                    } else {
+                        alert('You Reached the limits')
+                    }
+                });
+            
+                $(wrapper).on("click", ".delete", function(e) {
+                    e.preventDefault();
+                    $(this).parent('div').remove();
+                    x--;
+                })
+            });
+            </script>
+            <div class="container1">
+                <button class="add_form_field">Add New Field &nbsp; 
+                  <span style="font-size:16px; font-weight:bold;">+ </span>
+                </button>
+                <div><input id="id_ingredients" type="text" class="form-control" name="ingredients"></div>
+            </div>
+            <!--<input id="id_ingredients" type="text" class="form-control" name="name" value="{{ form.name.value }}" maxlength="100" required="">-->
+        </div>
+        <div class="form-group">
+            <label for="id_instructions">Instructions :</label>
+            <input id="id_instructions" type="text" class="form-control" name="instructions" value="{{ form.name.value }}" maxlength="100" required="">
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Ajouter">
+        <!--token de Cross-Site Request Forgery, protège des données d'entrées-->
+        {%csrf_token%}
+    </form>
+</div>
+</body>
+{% endblock %}
