@@ -1,6 +1,12 @@
 from django import forms
 from .models import *
 
+# region recipes
+
+class AddRecipeForm(forms.Form):
+    name = forms.CharField(label='Nom', max_length=100)
+
+# endregion recipes
 
 # region units
 class UpdateUnitForm(forms.Form):
