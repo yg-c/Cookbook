@@ -252,6 +252,21 @@ def deletecourse(request, pk):
 # region categories
 def getallcategories(request):
     categories = Category.objects.using('default')
+
+    # courses utilisées dans une recette
+    categories_ids = list(categories.values_list('id', flat=True))
+    recipe_categories = Recipe.objects.filter(category_id__in=categories_ids)
+    categories_used = list(recipe_categories.values_list('category_id', flat=True))
+    # remove duplicates
+    categories_used = dict.fromkeys(categories_used)
+    categories_used = list(categories_used)
+
+    for category in categories:
+        if category.id in categories_used:
+            category.used = 1
+        else:
+            category.used = 0
+
     return render(request, 'categories.html', {'categories': categories})
 
 
