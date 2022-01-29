@@ -4,7 +4,7 @@
 <body>
 <h1>Ingrédients</h1>
 <a href="../addingredient/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
-<table class="table table-hover">
+<table class="table table-hover" id="tableIngredients">
     <thead>
     <tr>
         <th scope="col">Nom</th>
@@ -59,4 +59,16 @@
             deleteButton.href="../deleteingredient/"+id;
         }
 </script>
+<script>
+            $(document).ready( function () {
+            $('#tableIngredients').dataTable( {
+                "bInfo" : false,
+                "paging": false,
+                "language": {
+                    "search": "Rechercher :"
+                }
+            } );
+        } );
+</script>
+<!-- Recherche-->
 {% endblock %}
