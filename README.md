@@ -35,3 +35,7 @@ Grant access
 > GRANT ALL ON *databasename.** to '*username*'@'*%* IDENTIFIED BY '*password*' WITH GRANT OPTION;
 
 > FLUSH PRIVILEGES;
+
+#### Documentation
+
+https://mariadb.com/kb/en/
