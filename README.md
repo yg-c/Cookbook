@@ -39,3 +39,24 @@ Grant access
 #### Documentation
 
 https://mariadb.com/kb/en/
+
+## Django
+
+Installation
+
+> python -m pip install Django
+
+Create a projet
+
+> django-admin startproject *projectname*
+
+Create an app
+
+> python manage.py startapp *appname*
+
+Run server
+
+> python manage.py runserver
+
+### Documentation
+https://docs.djangoproject.com/en/4.0/
