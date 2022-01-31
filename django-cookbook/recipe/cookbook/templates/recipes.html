@@ -4,7 +4,7 @@
 <body>
 <h1>Recettes :</h1>
 <a href="../addrecipe/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
-<table class="table table-hover">
+<table class="table table-hover" id="tableRecipes">
     <thead>
         <tr>
             <th scope="col">Nom</th>
@@ -44,7 +44,6 @@
 </div>
 </body>
 <script>
-<!-- Modal JavaScript-->
     function toDelete(id, name) {
             let recipeid = document.getElementById("deleteRecipeNumber");
             let recipename = document.getElementById("deleteRecipeName");
@@ -53,5 +52,15 @@
             recipename.innerHTML=name;
             deleteButton.href="../deleterecipe/"+id;
         }
+
+            $(document).ready( function () {
+            $('#tableRecipes').dataTable( {
+                "bInfo" : false,
+                "paging": false,
+                "language": {
+                    "search": "Rechercher :"
+                }
+            } );
+        } );
 </script>
 {% endblock %}
