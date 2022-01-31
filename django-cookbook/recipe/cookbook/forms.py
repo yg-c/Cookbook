@@ -19,7 +19,7 @@ class SortRecipesByCourse(forms.Form):
         course_name_list.append(c.name)
 
     course_tuple = list(zip(course_id_list, course_name_list))
-    
+
     # Renvoi de l'id
     course_choice = forms.IntegerField(label='Choix du plat', widget=forms.Select(choices=course_tuple))
 
