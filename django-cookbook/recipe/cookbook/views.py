@@ -89,7 +89,16 @@ def deleteunit(request, pk):
 # region recipes
 def getallrecipes(request):
     recipes = Recipe.objects.using('default')
-    return render(request, 'recipes.html', {'recipes': recipes})
+
+    form = SortRecipesByCourse()
+    if request.method == 'POST':
+        form = SortRecipesByCourse(request.POST)
+        if form.is_valid():
+            course = form.cleaned_data['course']
+            # renvoie de la liste
+        return HttpResponseRedirect('/cookbook/recipes/course')
+
+    return render(request, 'recipes.html', {'recipes': recipes, 'form': form})
 
 
 def detailselectedrecipe(request, pk):
