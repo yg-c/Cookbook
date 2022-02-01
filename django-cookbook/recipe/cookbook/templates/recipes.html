@@ -13,6 +13,8 @@
     <thead>
         <tr>
             <th scope="col">Nom</th>
+            <th scope="col">Plat</th>
+            <th scope="col">Catégorie</th>
             <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -20,6 +22,8 @@
         {%for recipe in recipes%}
             <tr>
                 <td>{{recipe.name}}</td>
+                <td>{{recipe.course_id.name}}</td>
+                <td>{{recipe.category_id.name}}</td>
                 <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
                  <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
                 </td>

@@ -88,8 +88,8 @@ def deleteunit(request, pk):
 
 # region recipes
 def getallrecipes(request):
-    recipes = Recipe.objects.using('default')
-    return render(request, 'recipes.html', {'recipes': recipes, 'form': form})
+    recipes = Recipe.objects.select_related('course_id').select_related('category_id')
+    return render(request, 'recipes.html', {'recipes': recipes})
 
 
 def detailselectedrecipe(request, pk):
