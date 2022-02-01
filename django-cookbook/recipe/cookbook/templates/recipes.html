@@ -11,24 +11,24 @@
 <a href="../addrecipe/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
 <table class="table table-hover" id="tableRecipes">
     <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Plat</th>
-            <th scope="col">Catégorie</th>
-            <th scope="col">Actions</th>
-        </tr>
+    <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Plat</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Actions</th>
+    </tr>
     </thead>
     <tbody>
-        {%for recipe in recipes%}
-            <tr>
-                <td>{{recipe.name}}</td>
-                <td>{{recipe.course_id.name}}</td>
-                <td>{{recipe.category_id.name}}</td>
-                <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
-                 <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
-                </td>
-            </tr>
-        {% endfor %}
+    {%for recipe in recipes%}
+    <tr>
+        <td>{{recipe.name}}</td>
+        <td>{{recipe.course_id.name}}</td>
+        <td>{{recipe.category_id.name}}</td>
+        <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
+            <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
+        </td>
+    </tr>
+    {% endfor %}
     </tbody>
 </table>
 <!-- Modal delete-->
@@ -86,7 +86,11 @@
                         $(api.column(colIdx).header()).index()
                     );
                     var title = $(cell).text();
-                    $(cell).html('<input type="text" placeholder="' + title + '" />');
+
+                    // Pour ne pas trier l'index 3 actions
+                    if ($(api.column(colIdx).header()).index() < 3) {
+                         $(cell).html('<input type="text" placeholder="' + title + '"/>');
+                    }
 
                     // On every keypress in this input
                     $(
