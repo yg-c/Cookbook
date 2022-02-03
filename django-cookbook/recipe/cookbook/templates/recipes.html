@@ -24,7 +24,8 @@
         <td>{{recipe.name}}</td>
         <td>{{recipe.course_id.name}}</td>
         <td>{{recipe.category_id.name}}</td>
-        <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
+        <td>
+            <button type="button" onclick="details('{{ recipe.id }}')" class="btn btn-primary" data-toggle="modal" data-target="#details">Détails</button>
             <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
         </td>
     </tr>
@@ -51,6 +52,26 @@
         </div>
     </div>
 </div>
+<!-- Modal details-->
+<div class="modal fade" id="details" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 align="left" class="modal-title">Détails</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <span hidden="hidden" id="detailsRecipeNumber"></span>
+                <p>Nombre de personnes ? </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a id="detailsButton" href="" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     function toDelete(id, name) {
@@ -60,6 +81,14 @@
             recipeid.innerHTML=id;
             recipename.innerHTML=name;
             deleteButton.href="../deleterecipe/"+id;
+        }
+</script>
+<script>
+    function details(id, name) {
+            let recipeid = document.getElementById("detailsRecipeNumber");
+            let detailsButton = document.getElementById("detailsButton");
+            recipeid.innerHTML=id;
+            detailsButton.href="../recipe/"+id;
         }
 </script>
 <script>
