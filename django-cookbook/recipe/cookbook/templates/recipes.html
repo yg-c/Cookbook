@@ -25,7 +25,7 @@
         <td>{{recipe.course_id.name}}</td>
         <td>{{recipe.category_id.name}}</td>
         <td>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#details">Détails</button>
+            <button type="button" onclick="getRecipeId('{{ recipe.id }}')" class="btn btn-primary" data-toggle="modal" data-target="#details">Détails</button>
             <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
         </td>
     </tr>
@@ -84,8 +84,12 @@
         }
 </script>
 <script>
+    function getRecipeId(id){
+        window.localStorage.setItem('id', id);
+    }
+
     function details() {
-            let recipeid = 2;
+            let recipeid = localStorage.getItem('id');
             let nbrpeople = Number(document.getElementById("nbrPeople").value);
             let detailsButton = document.getElementById("detailsButton");
             detailsButton.href="../recipe/"+recipeid+"/"+nbrpeople;
