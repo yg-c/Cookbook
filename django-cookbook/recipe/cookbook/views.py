@@ -8,6 +8,8 @@ from django.db.models import ProtectedError
 def index(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'index.html', {'recipes': recipes})
+
+
 # endregion index
 
 
@@ -83,6 +85,8 @@ def deleteunit(request, pk):
         return HttpResponseRedirect('/cookbook/units')
     except ProtectedError:
         return HttpResponseRedirect('/cookbook/units')
+
+
 # endregion Units
 
 
@@ -92,7 +96,8 @@ def getallrecipes(request):
     return render(request, 'recipes.html', {'recipes': recipes})
 
 
-def detailselectedrecipe(request, pk):
+def detailselectedrecipe(request, pk, nbr_people):
+    nbr_people = 3
     recipe = IngredientRecipe.objects.select_related('ingredient_id').select_related(
         'measurement_unit_id').select_related('recipe_id').filter(recipe_id=pk)
     name = recipe[0].recipe_id.name
@@ -102,8 +107,14 @@ def detailselectedrecipe(request, pk):
     preparation_time = recipe[0].recipe_id.preparation_time
     instructions = recipe[0].recipe_id.instructions
     ingredients = recipe
+
+    # ajuster les mesures par rapport au pax
+
+    for ingredient in ingredients:
+        print(ingredient)
+
     return render(request, 'recipe.html',
-                  {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
+                  {'recipe': recipe, 'name': name, 'pax': nbr_people, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
 
 
@@ -111,20 +122,23 @@ def deleterecipe(request, pk):
     Recipe.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/recipes')
 
+
 def addrecipe(request):
     form = AddRecipeForm()
     if request.method == 'POST':
         form = AddRecipeForm(request.POST)
-#       if form.is_valid():
-#           name = form.cleaned_data['name']
+    #       if form.is_valid():
+    #           name = form.cleaned_data['name']
 
-            # écriture dans la base de donnée
-#           ingredient = Ingredient(name=name)
-#            ingredient.save(using='default')
+    # écriture dans la base de donnée
+    #           ingredient = Ingredient(name=name)
+    #            ingredient.save(using='default')
 
-            # renvoie de la liste
-#        return HttpResponseRedirect('/cookbook/recipes')
-    return render(request, 'addrecipe.html')    
+    # renvoie de la liste
+    #        return HttpResponseRedirect('/cookbook/recipes')
+    return render(request, 'addrecipe.html')
+
+
 # endregion recipes
 
 
@@ -194,6 +208,8 @@ def updateingredient(request, pk):
         return HttpResponseRedirect('/cookbook/ingredients')
 
     return render(request, 'updateingredient.html', {'form': form})
+
+
 # endregion ingredients
 
 
@@ -261,6 +277,8 @@ def updatecourse(request, pk):
 def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/courses')
+
+
 # endregion courses
 
 

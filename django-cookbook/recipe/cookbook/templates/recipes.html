@@ -63,7 +63,8 @@
             </div>
             <div class="modal-body">
                 <span hidden="hidden" id="detailsRecipeNumber"></span>
-                <p>Nombre de personnes ? </p>
+                <label for="nbrPeople">Nombre de personnes :</label>
+                <input id="nbrPeople" type="number" value="1">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
@@ -84,11 +85,12 @@
         }
 </script>
 <script>
-    function details(id, name) {
+    function details(id) {
             let recipeid = document.getElementById("detailsRecipeNumber");
+            let nbrpeople = Number(document.getElementById("nbrPeople").value);
             let detailsButton = document.getElementById("detailsButton");
             recipeid.innerHTML=id;
-            detailsButton.href="../recipe/"+id;
+            detailsButton.href="../recipe/"+id+"/"+nbrpeople;
         }
 </script>
 <script>
