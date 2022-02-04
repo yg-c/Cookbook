@@ -4,10 +4,10 @@
 NAME="cookbook"
 
 # Django project directory
-DJANGODIR=/home/pi/GitHub/django-cookbook/recipe
+DJANGODIR=/home/pi/GitHub/Cookbook/django-cookbook/recipe
 
 # we will communicte using this unix socket
-SOCKFILE=/home/pi/GitHub/django-cookbook/run/gunicorn.sock
+SOCKFILE=/home/pi/GitHub/CookBook/deployment/run/gunicorn.sock
 
 # the user to run as
 USER=pi
@@ -28,7 +28,7 @@ echo "Starting $NAME as `whoami`"
 
 # Activate the virtual environment
 #cd $DJANGODIR
-source /home/pi/GitHub/django-cookbook/venv/bin/activate
+source /home/pi/GitHub/Cookbook/django-cookbook/venv/bin/activate
 
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
 export PYTHONPATH=$DJANGODIR:$PYTHONPATH
