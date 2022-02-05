@@ -2,7 +2,7 @@ FROM python:3.10
 
 RUN mkdir -p /home/pi/GiHub/Cookbook/
 
-RUN chmod u+x /home/pi/GitHub/Cookbook/deployment/gunicorn_start.sh
+RUN sudo chmod u+x /home/pi/GitHub/Cookbook/deployment/gunicorn_start.sh
 
 WORKDIR /home/pi/GiHub/Cookbook/
 
