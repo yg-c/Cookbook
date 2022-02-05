@@ -8,7 +8,7 @@ ADD ./ Cookbook/
 
 RUN ls -la Cookbook/*
 
-RUN sudo chmod u+x Cookbook/deployment/gunicorn_start.sh
+RUN chmod u+x Cookbook/deployment/gunicorn_start.sh
 
 RUN pip3 install -r Cookbook/django-cookbook/recipe/requirements.txt
 
