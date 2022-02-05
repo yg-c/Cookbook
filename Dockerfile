@@ -10,7 +10,7 @@ RUN ls -la Cookbook/*
 
 RUN chmod u+x Cookbook/deployment/gunicorn_start.sh
 
-RUN pip install -r Cookbook/django-cookbook/recipe/requirements.txt
+RUN sudo pip install -r Cookbook/django-cookbook/recipe/requirements.txt
 
 VOLUME Cookbook/run/
 
