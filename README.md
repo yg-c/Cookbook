@@ -8,6 +8,8 @@ App to gather your recipes.
 - MariaDB
 - MYSQL
 - Bootstrap
+- Gunicorn
+- Nginx
 
 # Setup
 ## Database
@@ -60,3 +62,30 @@ Run server
 
 ### Documentation
 https://docs.djangoproject.com/en/4.0/
+
+# Deployment
+
+### Gunicorn
+Adapt [gunicorn_start.sh](https://github.com/yg-c/Cookbook/blob/main/deployment/gunicorn_start.sh) file
+
+Set the executable bit on gunicorn_start script
+> sudo chmod u+x gunicorn_start.sh
+
+### Nginx
+
+Install and start Nginx
+> sudo apt-get install nginx
+> sudo service nginx start
+
+Delete fefault conf file
+> sudo rm -rf /etc/nginx/sites-available/default
+> sudo rm -rf /etc/nginx/site-enabled/default
+
+Adapt nginx configuration file [cookbook.conf](https://github.com/yg-c/Cookbook/tree/main/deployment/nginx)
+> /etc/nginx/sites-available/cookbook.conf
+
+Create a symbloic link in the sites-enabled folder
+> sudo ln -s /etc/nginx/sites-available/cookbook /etc/nginx/sites-enabled/hello
+
+Restart Nginx
+>sudo service nginx restart
