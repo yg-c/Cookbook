@@ -81,4 +81,11 @@ Delete fefault conf file
 > sudo rm -rf /etc/nginx/sites-available/default
 > sudo rm -rf /etc/nginx/site-enabled/default
 
-Adapt nginx configuration file [default.conf](https://github.com/yg-c/Cookbook/tree/main/deployment/nginx)
+Adapt nginx configuration file [cookbook.conf](https://github.com/yg-c/Cookbook/tree/main/deployment/nginx)
+> /etc/nginx/sites-available/cookbook.conf
+
+Create a symbloic link in the sites-enabled folder
+> sudo ln -s /etc/nginx/sites-available/cookbook /etc/nginx/sites-enabled/hello
+
+Restart Nginx
+>sudo service nginx restart
