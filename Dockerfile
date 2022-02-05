@@ -1,17 +1,17 @@
 FROM python:3.10
 
-RUN mkdir -p /home/pi/GiHub/Cookbook/
+RUN mkdir -p Cookbook/
 
-WORKDIR /home/pi/GiHub/Cookbook/
+WORKDIR Cookbook/
 
-ADD ./ /home/pi/GiHub/Cookbook/
+ADD ./ Cookbook/
 
-RUN ls -la /home/pi/GitHub/Cookbook/*
+RUN ls -la Cookbook/*
 
-RUN sudo chmod u+x /home/pi/GitHub/Cookbook/deployment/gunicorn_start.sh
+RUN sudo chmod u+x Cookbook/deployment/gunicorn_start.sh
 
-RUN pip3 install -r /home/pi/GitHub/django-cookbook/recipe/requirements.txt
+RUN pip3 install -r Cookbook/django-cookbook/recipe/requirements.txt
 
-VOLUME /home/pi/GitHub/Cookbook/run/
+VOLUME Cookbook/run/
 
-ENTRYPOINT ["/home/pi/GitHub/Cookbook/deployment/gunicorn_start"]
+ENTRYPOINT ["Cookbook/deployment/gunicorn_start"]
