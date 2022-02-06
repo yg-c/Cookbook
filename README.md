@@ -96,6 +96,9 @@ Restart Nginx
 List container
 > docker container ls -a
 
+List active container
+> docker container ls
+
 Delete container
 > docker container rm id
 
