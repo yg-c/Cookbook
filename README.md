@@ -10,6 +10,7 @@ App to gather your recipes.
 - Bootstrap
 - Gunicorn
 - Nginx
+- Docker
 
 # Setup
 ## Database
@@ -89,3 +90,22 @@ Create a symbloic link in the sites-enabled folder
 
 Restart Nginx
 >sudo service nginx restart
+
+# Docker
+Adapt [Dockerfile](https://github.com/yg-c/Cookbook/blob/main/Dockerfile)
+
+Build the docker image
+> cd .../Cookbook
+> docker build -t cookbook .
+
+Run docker container
+> docker run --name=container cookbook
+
+Verify socket inside the container
+> docker exec -it container /bin/bash
+
+List container
+> docker container ls -a
+
+Delete container
+> docker container rm id
