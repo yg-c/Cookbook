@@ -119,4 +119,5 @@ Build
 
 Up
 > sudo docker-compose up
+
 > sudo docker-compose up -d
