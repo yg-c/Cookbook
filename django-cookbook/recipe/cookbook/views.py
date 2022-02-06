@@ -5,15 +5,16 @@ from django.db.models import ProtectedError
 
 
 # region index
+
 def index(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'index.html', {'recipes': recipes})
-
 
 # endregion index
 
 
 # region units
+
 def measurementunits(request):
     units = MeasurementUnit.objects.using('default')
 
@@ -86,11 +87,11 @@ def deleteunit(request, pk):
     except ProtectedError:
         return HttpResponseRedirect('/cookbook/units')
 
-
 # endregion Units
 
 
 # region recipes
+
 def getallrecipes(request):
     recipes = Recipe.objects.select_related('course_id').select_related('category_id')
     return render(request, 'recipes.html', {'recipes': recipes})
@@ -136,11 +137,11 @@ def addrecipe(request):
     #        return HttpResponseRedirect('/cookbook/recipes')
     return render(request, 'addrecipe.html')
 
-
 # endregion recipes
 
 
 # region ingredients
+
 def getallingredients(request):
     ingredients = Ingredient.objects.using('default')
 
@@ -207,11 +208,11 @@ def updateingredient(request, pk):
 
     return render(request, 'updateingredient.html', {'form': form})
 
-
 # endregion ingredients
 
 
 # region courses
+
 def getallcourses(request):
     courses = Course.objects.using('default')
 
@@ -276,11 +277,11 @@ def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/courses')
 
-
 # endregion courses
 
 
 # region categories
+
 def getallcategories(request):
     categories = Category.objects.using('default')
 
@@ -344,4 +345,5 @@ def updatecategory(request, pk):
 def deletecategory(request, pk):
     Category.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/categories')
+
 # endregion categories
