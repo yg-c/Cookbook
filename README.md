@@ -96,22 +96,27 @@ Restart Nginx
 List container
 > docker container ls -a
 
-List active container
-> docker container ls
-
 Delete container
 > docker container rm id
 
-## Dockerize Django app
+Run a command in a running container
+> sudo docker exec -it container /bin/bash
+
+### Dockerize Django app
 
 Adapt [Dockerfile](https://github.com/yg-c/Cookbook/blob/main/Dockerfile)
 
-Build the docker image
-> cd .../Cookbook
-> docker build -t cookbook .
+### Dockerize Nginx app
 
-Run docker container
-> docker run --name=container cookbook
+Adapt [Dockerfile](https://github.com/yg-c/Cookbook/blob/main/deployment/nginx/Dockerfile)
 
-Verify socket inside the container
-> docker exec -it container /bin/bash
+### Docker compose
+
+Adapt [YML file](https://github.com/yg-c/Cookbook/blob/main/docker-compose.yml)
+
+Build
+> sudo docker-compose build
+
+Up
+> sudo docker-compose up
+> sudo docker-compose up -d
