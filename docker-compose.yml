@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  django:
+    build: .
+    container_name: django-container
+    networks:
+      - nginx_network
+    restart: always
+
+  nginx: 
+    build: ./nginx_deployment/ 
+    ports:
+      - 8085:80
+    volumes_from:
+      - django:rw
+    container_name: nginx-container
+    depends_on:
+      - django
+    networks:
+      - nginx_network
+
+networks: 
+  nginx_network:
+    driver: bridge
+
