@@ -14,4 +14,4 @@ RUN pip3 install -r Cookbook/django-cookbook/recipe/requirements.txt
 
 VOLUME Cookbook/run/
 
-ENTRYPOINT ["Cookbook/deployment/gunicorn_start"]
+ENTRYPOINT ["Cookbook/deployment/gunicorn_start.sh"]
