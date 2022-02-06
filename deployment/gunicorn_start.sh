@@ -7,7 +7,7 @@ NAME="cookbook"
 DJANGODIR=Cookbook/django-cookbook/recipe
 
 # we will communicte using this unix socket
-SOCKFILE=Cookbook/run/gunicorn.sock
+SOCKFILE=run/gunicorn.sock
 
 # the user to run as
 USER=root
