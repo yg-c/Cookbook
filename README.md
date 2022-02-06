@@ -92,6 +92,15 @@ Restart Nginx
 >sudo service nginx restart
 
 # Docker
+
+List container
+> docker container ls -a
+
+Delete container
+> docker container rm id
+
+## Dockerize Django app
+
 Adapt [Dockerfile](https://github.com/yg-c/Cookbook/blob/main/Dockerfile)
 
 Build the docker image
@@ -103,9 +112,3 @@ Run docker container
 
 Verify socket inside the container
 > docker exec -it container /bin/bash
-
-List container
-> docker container ls -a
-
-Delete container
-> docker container rm id
