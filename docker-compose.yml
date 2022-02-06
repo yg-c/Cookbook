@@ -9,7 +9,7 @@ services:
     restart: always
 
   nginx: 
-    build: ./nginx_deployment/ 
+    build: ./deployment/nginx
     ports:
       - 8085:80
     volumes_from:
