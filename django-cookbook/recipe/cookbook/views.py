@@ -115,15 +115,15 @@ def addrecipe(request):
     form = AddRecipeForm()
     if request.method == 'POST':
         form = AddRecipeForm(request.POST)
-#       if form.is_valid():
-#           name = form.cleaned_data['name']
+        if form.is_valid():
+            name = form.cleaned_data['name']
 
             # écriture dans la base de donnée
-#           ingredient = Ingredient(name=name)
-#            ingredient.save(using='default')
+            recipe = Recipe(name=name)
+            recipe.save(using='default')
 
             # renvoie de la liste
-#        return HttpResponseRedirect('/cookbook/recipes')
+        return HttpResponseRedirect('/cookbook/recipes')
     return render(request, 'addrecipe.html')    
 # endregion recipes
 
