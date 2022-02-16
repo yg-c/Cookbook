@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 
+
 # region recipes
 
 class AddRecipeForm(forms.Form):
@@ -11,6 +12,7 @@ class AddRecipeForm(forms.Form):
 
 # endregion recipes
 
+
 # region units
 class UpdateUnitForm(forms.Form):
     id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
@@ -19,6 +21,7 @@ class UpdateUnitForm(forms.Form):
 
 class AddUnitForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
+
 
 # endregion units
 
@@ -32,6 +35,7 @@ class UpdateIngredientForm(forms.Form):
 class AddIngredientForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
+
 # endregion ingredients
 
 
@@ -39,15 +43,18 @@ class AddIngredientForm(forms.Form):
 class AddCourseForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
 
+
 class UpdateCourseForm(forms.Form):
     id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))
     name = forms.CharField(label='Nom', max_length=100)
+
 
 # endregion courses
 
 # region categories
 class AddCategoryForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
+
 
 class UpdateCategoryForm(forms.Form):
     id = forms.IntegerField(widget=forms.TextInput(attrs={'readonly': 'readonly'}))

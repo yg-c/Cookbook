@@ -4,7 +4,7 @@
 <body>
 <h1>Ingrédients</h1>
 <a href="../addingredient/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
-<table class="table table-hover">
+<table class="table table-hover" id="tableIngredients">
     <thead>
     <tr>
         <th scope="col">Nom</th>
@@ -48,7 +48,6 @@
     </div>
 </div>
 </body>
-<!-- Modal JavaScript-->
 <script>
     function toDelete(id, name) {
             let ingredientid = document.getElementById("deleteIngredientNumber");
@@ -58,5 +57,14 @@
             ingredientname.innerHTML=name;
             deleteButton.href="../deleteingredient/"+id;
         }
+            $(document).ready( function () {
+            $('#tableIngredients').dataTable( {
+                "bInfo" : false,
+                "paging": false,
+                "language": {
+                    "search": "Rechercher :"
+                }
+            } );
+        } );
 </script>
 {% endblock %}

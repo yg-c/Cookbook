@@ -1,25 +1,35 @@
 {% extends "base.html" %}
 {% block body_block %}
+<style>
+    p {
+  text-align: right;
+}
+</style>
 <title>Recettes</title>
 <body>
 <h1>Recettes :</h1>
 <a href="../addrecipe/" class="btn btn-primary" aria-pressed="true">Ajouter</a>
-<table class="table table-hover">
+<table class="table table-hover" id="tableRecipes">
     <thead>
-        <tr>
-            <th scope="col">Nom</th>
-            <th scope="col">Actions</th>
-        </tr>
+    <tr>
+        <th class="col-3" scope="col">Nom</th>
+        <th class="col-1" scope="col">Plat</th>
+        <th class="col-1" scope="col">Catégorie</th>
+        <th class="col-3" scope="col">Actions</th>
+    </tr>
     </thead>
     <tbody>
-        {%for recipe in recipes%}
-            <tr>
-                <td>{{recipe.name}}</td>
-                <td><a href="../recipe/{{ recipe.id }}" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
-                 <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
-                </td>
-            </tr>
-        {% endfor %}
+    {%for recipe in recipes%}
+    <tr>
+        <td>{{recipe.name}}</td>
+        <td>{{recipe.course_id.name}}</td>
+        <td>{{recipe.category_id.name}}</td>
+        <td>
+            <button type="button" onclick="getRecipeId('{{ recipe.id }}')" class="btn btn-primary" data-toggle="modal" data-target="#details">Détails</button>
+            <button type="button" onclick="toDelete('{{ recipe.id }}', '{{ recipe.name }}')" class="btn btn-danger" data-toggle="modal" data-target="#delete">Supprimer</button>
+        </td>
+    </tr>
+    {% endfor %}
     </tbody>
 </table>
 <!-- Modal delete-->
@@ -42,9 +52,28 @@
         </div>
     </div>
 </div>
+<!-- Modal details-->
+<div class="modal fade" id="details" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 align="left" class="modal-title">Détails</h2>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <label for="nbrPeople">Nombre de personnes :</label>
+                <input id="nbrPeople" type="number" value="1" min="1">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <a id="detailsButton" onclick="details()" href="" class="btn btn-primary" role="button" aria-pressed="true">Détails</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
-<!-- Modal JavaScript-->
     function toDelete(id, name) {
             let recipeid = document.getElementById("deleteRecipeNumber");
             let recipename = document.getElementById("deleteRecipeName");
@@ -53,5 +82,83 @@
             recipename.innerHTML=name;
             deleteButton.href="../deleterecipe/"+id;
         }
+</script>
+<script>
+    function getRecipeId(id){
+        window.localStorage.setItem('id', id);
+    }
+
+    function details() {
+            let recipeid = localStorage.getItem('id');
+            localStorage.clear();
+            let nbrpeople = Number(document.getElementById("nbrPeople").value);
+            let detailsButton = document.getElementById("detailsButton");
+            detailsButton.href="../recipe/"+recipeid+"/"+nbrpeople;
+        }
+</script>
+<script>
+    $(document).ready(function () {
+    // Setup - add a text input to each footer cell
+    $('#tableRecipes thead tr')
+        .clone(true)
+        .addClass('filters')
+        .appendTo('#tableRecipes thead');
+
+    var table = $('#tableRecipes').DataTable({
+        orderCellsTop: true,
+        fixedHeader: true,
+        initComplete: function () {
+            var api = this.api();
+
+            // For each column
+            api
+                .columns()
+                .eq(0)
+                .each(function (colIdx) {
+                    // Set the header cell to contain the input element
+                    var cell = $('.filters th').eq(
+                        $(api.column(colIdx).header()).index()
+                    );
+                    var title = $(cell).text();
+
+                    // Pour ne pas trier l'index 3 actions
+                    if ($(api.column(colIdx).header()).index() < 3) {
+                         $(cell).html('<input type="text" placeholder="' + title + '"/>');
+                    }
+
+                    // On every keypress in this input
+                    $(
+                        'input',
+                        $('.filters th').eq($(api.column(colIdx).header()).index())
+                    )
+                        .off('keyup change')
+                        .on('keyup change', function (e) {
+                            e.stopPropagation();
+
+                            // Get the search value
+                            $(this).attr('title', $(this).val());
+                            var regexr = '({search})'; //$(this).parents('th').find('select').val();
+
+                            var cursorPosition = this.selectionStart;
+                            // Search the column for that value
+                            api
+                                .column(colIdx)
+                                .search(
+                                    this.value != ''
+                                        ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                        : '',
+                                    this.value != '',
+                                    this.value == ''
+                                )
+                                .draw();
+
+                            $(this)
+                                .focus()[0]
+                                .setSelectionRange(cursorPosition, cursorPosition);
+                        });
+                });
+        },
+    });
+});
 </script>
 {% endblock %}
