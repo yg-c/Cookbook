@@ -92,7 +92,7 @@ def getallrecipes(request):
     return render(request, 'recipes.html', {'recipes': recipes})
 
 
-def detailselectedrecipe(request, pk):
+def detailselectedrecipe(request, pk, nbr_people):
     recipe = IngredientRecipe.objects.select_related('ingredient_id').select_related(
         'measurement_unit_id').select_related('recipe_id').filter(recipe_id=pk)
     name = recipe[0].recipe_id.name
@@ -102,8 +102,13 @@ def detailselectedrecipe(request, pk):
     preparation_time = recipe[0].recipe_id.preparation_time
     instructions = recipe[0].recipe_id.instructions
     ingredients = recipe
+
+    # ajuster les mesures par rapport au pax
+    for ingredient in ingredients:
+        ingredient.quantity = ingredient.quantity/pax*nbr_people
+
     return render(request, 'recipe.html',
-                  {'recipe': recipe, 'name': name, 'pax': pax, 'category': category, 'course': course,
+                  {'recipe': recipe, 'name': name, 'pax': nbr_people, 'category': category, 'course': course,
                    'preparation_time': preparation_time, 'instructions': instructions, 'ingredients': ingredients})
 
 
