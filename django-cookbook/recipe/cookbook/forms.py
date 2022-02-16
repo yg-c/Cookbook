@@ -5,6 +5,9 @@ from .models import *
 
 class AddRecipeForm(forms.Form):
     name = forms.CharField(label='Nom', max_length=100)
+#    nbpeople = forms.IntegerField
+    #category = forms.ModelChoiceField(queryset=Recipe.category_id.all(), empty_label="(Nothing)")
+
 
 # endregion recipes
 
