@@ -90,7 +90,6 @@
 
     function details() {
             let recipeid = localStorage.getItem('id');
-            localStorage.clear();
             let nbrpeople = Number(document.getElementById("nbrPeople").value);
             let detailsButton = document.getElementById("detailsButton");
             detailsButton.href="../recipe/"+recipeid+"/"+nbrpeople;
