@@ -129,7 +129,7 @@ def addrecipe(request):
 
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/recipes')
-    return render(request, 'addrecipe.html')    
+    return render(request, 'addrecipe.html', {'form': form})    
 # endregion recipes
 
 

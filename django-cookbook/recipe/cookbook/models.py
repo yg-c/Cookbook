@@ -62,7 +62,8 @@ class Recipe(models.Model):
     pax = models.PositiveIntegerField(db_column='pax')
     preparation_time = models.PositiveIntegerField(db_column='preparation_time')
     instructions = models.TextField(db_column='instructions')
-
+    recipe_image = models.ImageField(db_column='recipe_image')
+    
     objects = models.Manager()
 
     class Meta:

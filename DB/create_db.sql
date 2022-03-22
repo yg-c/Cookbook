@@ -18,6 +18,7 @@ CREATE TABLE recipe(
                        pax int,
                        preparation_time int,
                        instructions text,
+                       recipe_image text,
                        PRIMARY KEY (id),
                        FOREIGN KEY (category_id) REFERENCES category(id),
                        FOREIGN KEY (course_id) REFERENCES course(id)

@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'cookbook',
         'USER': 'recipe',
         'PASSWORD': 'admin',
-        'HOST': '192.168.1.10',
+        'HOST': '127.0.0.1',
         'PORT': '3306'
     }
 }
