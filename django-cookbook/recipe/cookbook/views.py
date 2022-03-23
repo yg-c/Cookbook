@@ -122,10 +122,11 @@ def addrecipe(request):
         form = AddRecipeForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
-
+            course_choice = form.cleaned_data['courses_choice']
             # écriture dans la base de donnée
             recipe = Recipe(name=name)
             recipe.save(using='default')
+            print(course_choice)
 
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/recipes')
