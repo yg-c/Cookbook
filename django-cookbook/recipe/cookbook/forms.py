@@ -33,7 +33,19 @@ class AddRecipeForm(forms.Form):
     pax = forms.IntegerField(label='Nombre de personnes')
     time = forms.IntegerField(label='Temps de préparation')
     instructions = forms.CharField(label='Nom', max_length=100)
+    cat = Category.objects.using('default')
 
+    # Liste déroulante ingrédients (liste ne peut-être que sous forme de tuples)
+    ingredients = Ingredient.objects.using('default')
+    ingredients_name_list = []
+    ingredients_id_list = []
+    for ingredient in ingredients:
+        ingredients_id_list.append(ingredient.id)
+        ingredients_name_list.append(ingredient.name)
+    ingredients_tuples = list(zip(ingredients_id_list, ingredients_name_list))
+    # Renvoi de l'id
+    ingredients_choice = forms.IntegerField(label='Choix du de la catégorie',
+                                            widget=forms.Select(choices=ingredients_tuples))
 
 
 # TO BE ADDED
