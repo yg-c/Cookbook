@@ -8,6 +8,8 @@ from django.db.models import ProtectedError
 def index(request):
     recipes = Recipe.objects.using('default')
     return render(request, 'index.html', {'recipes': recipes})
+
+
 # endregion index
 
 
@@ -83,6 +85,8 @@ def deleteunit(request, pk):
         return HttpResponseRedirect('/cookbook/units')
     except ProtectedError:
         return HttpResponseRedirect('/cookbook/units')
+
+
 # endregion Units
 
 
@@ -105,7 +109,7 @@ def detailselectedrecipe(request, pk, nbr_people):
 
     # ajuster les mesures par rapport au pax
     for ingredient in ingredients:
-        ingredient.quantity = ingredient.quantity/pax*nbr_people
+        ingredient.quantity = ingredient.quantity / pax * nbr_people
 
     return render(request, 'recipe.html',
                   {'recipe': recipe, 'name': name, 'pax': nbr_people, 'category': category, 'course': course,
@@ -116,6 +120,7 @@ def deleterecipe(request, pk):
     Recipe.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/recipes')
 
+
 def addrecipe(request):
     form = AddRecipeForm()
     if request.method == 'POST':
@@ -123,14 +128,24 @@ def addrecipe(request):
         if form.is_valid():
             name = form.cleaned_data['name']
             course_choice = form.cleaned_data['courses_choice']
-            # écriture dans la base de donnée
-            recipe = Recipe(name=name)
-            recipe.save(using='default')
-            print(course_choice)
+            categorie_choice = form.cleaned_data['categories_choice']
+            pax = form.cleaned_data['pax']
+            preparation_time = form.cleaned_data['time']
+            instructions = form.cleaned_data['instructions']
 
+            # écriture dans la base de donnée
+            categorie = Category.objects.using('default').filter(id=categorie_choice)  # récupération de l'object
+            course = Course.objects.using('default').filter(id=course_choice)  # récupération de l'object
+            recipe = Recipe(name=name, category_id=categorie[0], course_id=course[0], pax=pax,
+                            preparation_time=preparation_time, instructions=instructions)
+            recipe.save(using='default')
+        else:
+            print('prob')
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/recipes')
-    return render(request, 'addrecipe.html', {'form': form})    
+    return render(request, 'addrecipe.html', {'form': form})
+
+
 # endregion recipes
 
 
@@ -200,6 +215,8 @@ def updateingredient(request, pk):
         return HttpResponseRedirect('/cookbook/ingredients')
 
     return render(request, 'updateingredient.html', {'form': form})
+
+
 # endregion ingredients
 
 
@@ -267,6 +284,8 @@ def updatecourse(request, pk):
 def deletecourse(request, pk):
     Course.objects.using('default').filter(id=pk).delete()
     return HttpResponseRedirect('/cookbook/courses')
+
+
 # endregion courses
 
 

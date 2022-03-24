@@ -10,14 +10,29 @@
     <h1>Ajout d'une recette</h1>
     <form class="col-md-offset-0 col-md-6" action="" method="post">
         <div class="form-group">
-            <label for="id_name">Nom de la recette :</label>
-            <input id="id_name" type="text" class="form-control" name="name" value="{{ form.name.value }}" maxlength="100" required="">
+            <label for="name">Nom de la recette :</label>
+            <input id="name" type="text" class="form-control" name="name" value="{{ form.name.value }}" maxlength="100" required="">
         </div>
         <div class="form-group">
-                <label>Course :</label>
-                <br>
-                {{ form.courses_choice }}
-            </div>
+            <label>Course :</label>
+            {{ form.courses_choice }}
+        </div>
+        <div class="form-group">
+            <label>Catégorie :</label>
+            {{ form.categories_choice }}
+        </div>
+        <div class="form-group">
+            <label for="pax">Nombre de personnes :</label>
+            <input id="pax" type="number" class="form-control" name="pax" value="{{ form.pax.value }}" required="" min="0">
+        </div>
+        <div class="form-group">
+            <label for="time">Temps de préparation :</label>
+            <input id="time" type="number" class="form-control" name="time" value="{{ form.time.value }}" required="" min="0">
+        </div>
+        <div class="form-group">
+            <label for="instructions">Instructions :</label>
+            <input id="instructions" type="text" class="form-control" name="instructions" value="{{ form.instructions.value }}" required="">
+        </div>
         <!--
         <div class="form-group">
             <label for="id_nbpeople">Nombre de personnes :</label>
