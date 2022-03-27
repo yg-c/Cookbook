@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block body_block %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<title>Ajout recette</title>
+<body>
+<div class="container">
+    <h1>Ajout d'une recette</h1>
+    <form class="col-md-offset-0 col-md-6" action="" method="post">
+        {% for form in formset %}
+        <div class="form-group">
+            <label for="name">Nom de la recette :</label>
+            <input id="name" type="text" class="form-control" name="name" value="{{ form.name.value }}" maxlength="100" required="">
+        </div>
+        <div class="form-group">
+            <label>Course :</label>
+            {{ form.courses_choice }}
+        </div>
+        <div class="form-group">
+            <label>Catégorie :</label>
+            {{ form.categories_choice }}
+        </div>
+        <div class="form-group">
+            <label for="pax">Nombre de personnes :</label>
+            <input id="pax" type="number" class="form-control" name="pax" value="{{ form.pax.value }}" required="" min="0">
+        </div>
+        <div class="form-group">
+            <label for="time">Temps de préparation :</label>
+            <input id="time" type="number" class="form-control" name="time" value="{{ form.time.value }}" required="" min="0">
+        </div>
+        <div class="form-group">
+            <label for="instructions">Instructions :</label>
+            <input id="instructions" type="text" class="form-control" name="instructions" value="{{ form.instructions.value }}" required="">
+        </div>
+        <div class="input-group">
+            <label>Ingrédients :</label>{{ form.ingredients_choice }}
+            <div class="input-group-append">
+                <button class="btn btn-success add-form-row">+</button>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Ajouter">
+        </div>
+        <!--token de Cross-Site Request Forgery, protège des données d'entrées-->
+        {%csrf_token%}
+    </form>
+</div>
+</body>
+<script>
+            $(document).ready(function() {
+                var max_fields = 20;
+                var wrapper = $(".container1");
+                var add_button = $(".add_form_field");
+                var field_count = 1;
+                $(add_button).click(function(e) {
+                    e.preventDefault();
+                    if (field_count < max_fields) {
+                        field_count++;
+                        $(wrapper).append('<div><div><label>Ingrédients :</label> "" </div><a href="#" class="delete">Delete</a></div>'); //add input box
+                    } else {
+                        alert('You Reached the limits')
+                    }
+                });
+                $(wrapper).on("click", ".delete", function(e) {
+                    e.preventDefault();
+                    $(this).parent('div').remove();
+                    field_count--;
+                })
+            });
+            </script>
+{% endblock %}
