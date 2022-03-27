@@ -1,11 +1,17 @@
 from django import forms
+from django.forms import formset_factory
+
 from .models import *
 
 
 # region recipes
 
 class AddRecipeForm(forms.Form):
-    name = forms.CharField(label='Nom', max_length=100)
+    name = forms.CharField(label='Nom', widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Nom'
+        })
+    )
 
     # Liste déroulante categories (liste ne peut-être que sous forme de tuples)
     categories = Category.objects.using('default')
@@ -46,6 +52,10 @@ class AddRecipeForm(forms.Form):
     # Renvoi de l'id
     ingredients_choice = forms.IntegerField(label='Choix du de la catégorie',
                                             widget=forms.Select(choices=ingredients_tuples))
+
+
+RecepeFormset = formset_factory(AddRecipeForm, extra=1)
+
 
 # TO BE ADDED
 # category = forms.ModelChoiceField(queryset=Recipe.category_id.all(), empty_label="(Nothing)")
