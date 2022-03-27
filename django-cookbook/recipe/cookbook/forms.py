@@ -47,7 +47,6 @@ class AddRecipeForm(forms.Form):
     ingredients_choice = forms.IntegerField(label='Choix du de la catégorie',
                                             widget=forms.Select(choices=ingredients_tuples))
 
-
 # TO BE ADDED
 # category = forms.ModelChoiceField(queryset=Recipe.category_id.all(), empty_label="(Nothing)")
 # image = forms.ImageField()
