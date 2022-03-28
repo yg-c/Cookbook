@@ -37,6 +37,8 @@
         <div class="col-4">
             <div class="input-group">
                 {{form.ingredients_choice}}
+                {{form.units_choice}}
+                <input id="quantity" type="number" class="form-control" name="time" value="{{ form.quantity.value }}" required="" min="0">
                 <div class="input-group-append">
                     <button class="btn btn-success add-form-row">+</button>
                 </div>
