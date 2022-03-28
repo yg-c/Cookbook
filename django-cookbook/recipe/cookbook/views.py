@@ -122,27 +122,35 @@ def deleterecipe(request, pk):
 
 
 def addrecipe(request):
-    formset = RecepeFormset()
+    data = {
+        'form-TOTAL_FORMS': '2',
+        'form-INITIAL_FORMS': '0',
+    }
+
+    formset = RecepeFormset(data)
     if request.method == 'GET':
         formset = RecepeFormset(request.GET or None)
     elif request.method == 'POST':
         formset = RecepeFormset(request.POST)
         if formset.is_valid():
             for form in formset:
-                name = form.cleaned_data.get('name')
-            # course_choice = form.cleaned_data['courses_choice']
-            # categorie_choice = form.cleaned_data['categories_choice']
-            # pax = form.cleaned_data['pax']
-            # preparation_time = form.cleaned_data['time']
-            # instructions = form.cleaned_data['instructions']
-            # écriture dans la base de donnée
-            # categorie = Category.objects.using('default').filter(id=categorie_choice)  # récupération de l'object
-            # course = Course.objects.using('default').filter(id=course_choice)  # récupération de l'object
-            # recipe = Recipe(name=name, category_id=categorie[0], course_id=course[0], pax=pax,
-            #                preparation_time=preparation_time, instructions=instructions)
+                name = form.cleaned_data('name')
+                print(name)
+                course_choice = form.cleaned_data['courses_choice']
+                categorie_choice = form.cleaned_data['categories_choice']
+                pax = form.cleaned_data['pax']
+                preparation_time = form.cleaned_data['time']
+                instructions = form.cleaned_data['instructions']
+                # écriture dans la base de donnée
+                categorie = Category.objects.using('default').filter(id=categorie_choice)  # récupération de l'object
+                course = Course.objects.using('default').filter(id=course_choice)  # récupération de l'object
+                recipe = Recipe(name=name, category_id=categorie[0], course_id=course[0], pax=pax,
+                                preparation_time=preparation_time, instructions=instructions)
             # recipe.save(using='default')
         else:
-            print('prob')
+            print(formset.is_valid())
+            print(formset.non_form_errors())
+            print(formset.errors)
             # renvoie de la liste
         return HttpResponseRedirect('/cookbook/recipes')
     return render(request, 'addrecipe.html', {'formset': formset})

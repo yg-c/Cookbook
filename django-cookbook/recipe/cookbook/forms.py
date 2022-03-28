@@ -12,7 +12,6 @@ class AddRecipeForm(forms.Form):
         'placeholder': 'Nom'
     })
                            )
-
     # Liste déroulante categories (liste ne peut-être que sous forme de tuples)
     categories = Category.objects.using('default')
     categories_name_list = []
@@ -68,7 +67,7 @@ class AddRecipeForm(forms.Form):
     quantity = forms.IntegerField(label='Quantité')
 
 
-RecepeFormset = formset_factory(AddRecipeForm, extra=1)
+RecepeFormset = formset_factory(AddRecipeForm, validate_max=False)
 
 
 # TO BE ADDED

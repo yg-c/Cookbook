@@ -2,6 +2,8 @@
 {% block body_block %}
 <title>Ajout recette</title>
 <body>
+    {{ formset.management_form }}
+    {% for form in formset %}
 <form class="col-md-offset-0 col-md-6" method="POST" action="">
     {% csrf_token %}
     <div class="form-group">
@@ -28,8 +30,7 @@
         <label for="instructions">Instructions :</label>
         <input id="instructions" type="text" class="form-control" name="instructions" value="{{ form.instructions.value }}" required="">
     </div>
-    {{ formset.management_form }}
-    {% for form in formset %}
+
     <div class="row form-row spacer">
         <div class="col-2">
             <label>Ingrédient</label>
